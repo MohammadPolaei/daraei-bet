@@ -8,16 +8,18 @@ import MatchTeamBadge from "./match-team-badge";
 
 export default function MatchHeroCard() {
 	return (
-		<SectionContainer extraClass="flex flex-col justify-center items-center gap-5">
-			<TopTittle>فعال</TopTittle>
-			<MatchScore />
-			<MatchLeverage />
-			<ForecastButton>ویرایش پیش بینی</ForecastButton>
+		<div>
+			<SectionContainer extraClass="flex flex-col justify-center items-center gap-5">
+				<TopTittle>فعال</TopTittle>
+				<MatchScore />
+				<MatchLeverage />
+				<ForecastButton>ویرایش پیش بینی</ForecastButton>
+			</SectionContainer>
 
 			<MatchTeamBadge />
 
 			{/*  */}
 			<MatchDistributionBar />
-		</SectionContainer>
+		</div>
 	);
 }

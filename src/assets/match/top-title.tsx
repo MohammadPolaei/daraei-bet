@@ -1,12 +1,12 @@
-import React, { useId } from "react";
+import { FC, HTMLAttributes, ReactNode, useId } from "react";
 
-interface MatchStatusPillProps extends React.HTMLAttributes<HTMLDivElement> {
-	children?: React.ReactNode;
+interface MatchStatusPillProps extends HTMLAttributes<HTMLDivElement> {
+	children?: ReactNode;
 	width?: number;
 	height?: number;
 }
 
-export const TopTittle: React.FC<MatchStatusPillProps> = ({
+export const TopTittle: FC<MatchStatusPillProps> = ({
 	children,
 	className = "w-full",
 	width = "100%",
@@ -21,7 +21,7 @@ export const TopTittle: React.FC<MatchStatusPillProps> = ({
 
 	return (
 		<div
-			className={`w-full absolute -top-21 right-[-0.25] select-none pointer-events-none flex flex-col justify-start items-center ${className}`}
+			className={`w-full absolute -top-22 right-[-0.25] select-none pointer-events-none flex flex-col justify-start items-center ${className}`}
 			style={{
 				width,
 				height,
