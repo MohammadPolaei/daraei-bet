@@ -1,11 +1,14 @@
 "use client";
 import MatchContainer from "@/assets/match/match-container";
+import SetGoalContainer from "@/assets/match/set-goal-container";
+import SetGoalState from "@/components/shared/set-goal-state";
 import { useState } from "react";
 
 export default function MatchScore() {
 	const [activeButton, setActiveButton] = useState("");
 	const buttonsClass =
 		"w-full py-2.5 rounded-[14px] text-[12px] cursor-pointer transition-all duration-500 ease-in-out";
+
 	return (
 		<div className="w-full flex flex-col justify-start gap-0">
 			<div className="relative h-39 flex flex-col justify-start items-center">
@@ -60,6 +63,12 @@ export default function MatchScore() {
 				>
 					برد مراکش
 				</button>
+			</div>
+			<div className="w-full pt-3">
+				<SetGoalContainer>
+					<SetGoalState goal={2} />
+					<SetGoalState goal={0} />
+				</SetGoalContainer>
 			</div>
 		</div>
 	);
