@@ -1,26 +1,47 @@
 @import "tailwindcss";
-
+/* 
+رنگ‌های اصلی
+#090909 — پس‌زمینه اصلی تیره
+#010101 — مشکی نزدیک به خالص
+#0C0C0A — خاکستری-مشکی تیره
+#222319 — سطح/کارت‌های تیره
+#434548 — خاکستری متن یا آیکن‌های کم‌رنگ
+#9C9B9A — متن یا آیکن‌های خنثی روشن
+رنگ‌های accent
+#A8CE2F — سبز نئونی اصلی دکمه‌ها و هایلایت‌ها
+#92C229 — سبز میانگین/رنگ accent غالب
+#556C18 — سبز تیره‌تر برای سایه یا حالت غیرفعال
+رنگ‌های هشدار / وضعیت
+#CF1528 — قرمز اصلی برای هشدار یا وضعیت منفی
+#C01C2B — قرمز تیره‌تر / سایه قرمز
+رنگ زرد
+#B7DB2F — زرد-سبز روشن برای تأکید یا نوارهای اطلاعاتی 
+*/
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+	/* Backgrounds */
+	--bg-primary: #090909;
+	--bg-card: #222319;
+	--bg-darker: #010101;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+	/* Primary (Neon Green) */
+	--primary: #a8ce2f;
+	--primary-muted: #92c229;
+	--primary-dark: #556c18;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+	/* Accent/Yellow-Green */
+	--accent: #b7db2f;
+
+	/* Status/Alert (Red) */
+	--danger: #cf1528;
+	--danger-dark: #c01c2b;
+
+	/* Text & Neutral */
+	--text-main: #ffffff;
+	--text-muted: #9c9b9a;
+	--text-gray: #434548;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+	background-color: var(--bg-primary);
+	color: var(--text-main);
 }
