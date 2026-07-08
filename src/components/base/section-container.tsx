@@ -9,7 +9,7 @@ export default function SectionContainer({
 }) {
 	return (
 		<section
-			className={`${extraClass} text-white p-1.5 rounded-2xl border border-gray-600 mx-auto relative shadow-2xl">`}
+			className={`${extraClass} text-white p-1.5 rounded-[20px] border border-gray-700 mx-auto relative "`}
 		>
 			{children}
 		</section>

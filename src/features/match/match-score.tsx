@@ -5,9 +5,9 @@ import { useState } from "react";
 export default function MatchScore() {
 	const [activeButton, setActiveButton] = useState("");
 	const buttonsClass =
-		"w-full py-2 rounded-xl text-[12px] cursor-pointer transition-all duration-500 ease-in-out";
+		"w-full py-2.5 rounded-[14px] text-[12px] cursor-pointer transition-all duration-500 ease-in-out";
 	return (
-		<div className="w-full">
+		<div className="w-full flex flex-col justify-start gap-0">
 			<div className="relative h-39 flex flex-col justify-start items-center">
 				<MatchContainer>
 					<div className="w-full flex justify-evenly items-center">
@@ -34,8 +34,8 @@ export default function MatchScore() {
 					onClick={() => setActiveButton("right")}
 					className={`${
 						activeButton == "right"
-							? "bg-(--accent)/20 border border-(--accent)/50 text-(--text-main)"
-							: "bg-(--bg-card) text-(--text-muted) border border-white/0"
+							? "bg-(--accent)/20 border border-(--accent)/50 text-(--text-main) font-semibold"
+							: "bg-(--bg-card) text-(--text-muted) border border-white/0 font-semibold"
 					} ${buttonsClass}`}
 				>
 					برد فرانسه
@@ -54,8 +54,8 @@ export default function MatchScore() {
 					onClick={() => setActiveButton("left")}
 					className={`${
 						activeButton == "left"
-							? "bg-(--accent)/20 border border-(--accent)/50 text-(--text-main)"
-							: "bg-(--bg-card) text-(--text-muted) border border-white/0"
+							? "bg-(--accent)/20 border border-(--accent)/50 text-(--text-main) font-semibold"
+							: "bg-(--bg-card) text-(--text-muted) border border-white/0 font-semibold"
 					} ${buttonsClass}`}
 				>
 					برد مراکش

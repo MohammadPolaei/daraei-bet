@@ -8,8 +8,8 @@ interface MatchStatusPillProps extends React.HTMLAttributes<HTMLDivElement> {
 
 export const TopTittle: React.FC<MatchStatusPillProps> = ({
 	children,
-	className = "",
-	width = 350,
+	className = "w-full",
+	width = "100%",
 	height = 202,
 	style,
 	...props
@@ -21,7 +21,7 @@ export const TopTittle: React.FC<MatchStatusPillProps> = ({
 
 	return (
 		<div
-			className={`absolute -top-20 inline-block select-none pointer-events-none ${className}`}
+			className={`w-full absolute -top-21 right-[-0.25] select-none pointer-events-none flex flex-col justify-start items-center ${className}`}
 			style={{
 				width,
 				height,
@@ -30,13 +30,13 @@ export const TopTittle: React.FC<MatchStatusPillProps> = ({
 			{...props}
 		>
 			<svg
-				width="100%"
+				width="90%"
 				height="100%"
 				viewBox="0 0 157 101"
 				preserveAspectRatio="none"
 				fill="none"
 				xmlns="http://www.w3.org/2000/svg"
-				className="absolute inset-0 h-full w-full"
+				className=""
 				aria-hidden="true"
 			>
 				<g filter={`url(#${filterId})`}>
