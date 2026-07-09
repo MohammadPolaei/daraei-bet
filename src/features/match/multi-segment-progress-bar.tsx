@@ -1,4 +1,6 @@
-import React, { useMemo } from "react";
+"use client";
+
+import { CSSProperties, FC, useMemo } from "react";
 
 // تعریف ساختار مشخصات هر بخش (سگمنت)
 export interface ProgressSegment {
@@ -17,6 +19,7 @@ interface MultiSegmentProgressBarProps {
 /**
  * تابع کمکی برای تبدیل اعداد انگلیسی به فارسی به همراه ممیز فارسی (شبیه به طرح تصویر)
  */
+
 const toPersianNumbers = (num: number): string => {
 	const persianDigits = ["۰", "۱", "۲", "۳", "۴", "۵", "۶", "۷", "۸", "۹"];
 	return num
@@ -25,9 +28,7 @@ const toPersianNumbers = (num: number): string => {
 		.replace(/\d/g, (x) => persianDigits[parseInt(x)]);
 };
 
-export const MultiSegmentProgressBar: React.FC<
-	MultiSegmentProgressBarProps
-> = ({
+export const MultiSegmentProgressBar: FC<MultiSegmentProgressBarProps> = ({
 	segments,
 	totalPredictions = "۹۶۵ پیش‌بینی",
 	title = "نظر کاربران",
@@ -35,6 +36,12 @@ export const MultiSegmentProgressBar: React.FC<
 	// محاسبه مجموع کل درصدها برای مقیاس‌دهی دقیق (در صورتی که مجموع دقیقاً ۱۰۰ نباشد)
 	const totalPercentage = useMemo(() => {
 		return segments.reduce((sum, segment) => sum + segment.percentage, 0);
+	}, [segments]);
+
+	const maxLabel = useMemo(() => {
+		return segments.reduce((max, item) =>
+			item.percentage > max.percentage ? item : max
+		).label;
 	}, [segments]);
 
 	return (
@@ -69,26 +76,38 @@ export const MultiSegmentProgressBar: React.FC<
 
 			{/* بخش پایینی شامل درصدها و نام‌ها */}
 			<div style={styles.labelsWrapper}>
-				{segments.map((segment, index) => (
-					<div key={`label-${index}`} style={styles.labelColumn}>
-						<span
-							className="text-(--text-main)"
-							style={{
-								...styles.percentageText,
-							}}
-						>
-							{toPersianNumbers(segment.percentage)}٪
-						</span>
-						<span style={styles.labelText}>{segment.label}</span>
-					</div>
-				))}
+				{segments.map((segment, index) => {
+					const color = segment.color;
+
+					return (
+						<div key={`label-${index}`} style={styles.labelColumn}>
+							<span
+								style={{
+									...styles.percentageText,
+									color:
+										segment.label == maxLabel
+											? segment.color
+											: "text-(--text-main)",
+								}}
+							>
+								{toPersianNumbers(segment.percentage)}٪
+							</span>
+							<span
+								className="transition-colors duration-300"
+								style={styles.labelText}
+							>
+								{segment.label}
+							</span>
+						</div>
+					);
+				})}
 			</div>
 		</div>
 	);
 };
 
 // استایل‌های بهینه و امن با Inline-Styles برای عدم وابستگی به کتابخانه‌های خارجی
-const styles: Record<string, React.CSSProperties> = {
+const styles: Record<string, CSSProperties> = {
 	cardContainer: {
 		direction: "rtl", // جهت کلی متن فارسی راست به چپ
 	},
@@ -142,8 +161,8 @@ const styles: Record<string, React.CSSProperties> = {
 		letterSpacing: "-0.5px",
 	},
 	labelText: {
-		color: "#48484a",
 		fontSize: "10px",
 		fontWeight: 500,
+		color: "#9c9b9a",
 	},
 };

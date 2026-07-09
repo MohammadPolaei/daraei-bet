@@ -38,6 +38,7 @@ const predictionData: [ProgressSegment, ProgressSegment, ProgressSegment] = [
 		color: "#d90452",
 	},
 ];
+
 export default function MatchHeroCard() {
 	return (
 		<div className="">
