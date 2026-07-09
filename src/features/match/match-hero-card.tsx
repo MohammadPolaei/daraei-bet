@@ -61,6 +61,13 @@ export default function MatchHeroCard() {
 
 			{/*  */}
 			<MatchDistributionBar />
+			<SectionContainer
+				rounded="rounded-[10px]"
+				extraClass="flex justify-between items-center text-[10px] font-semibold px-3"
+			>
+				<span className="text-(--text-muted)">پیشرفت پاسخ دهی</span>
+				<span className="text-(--primary)">0 از 6</span>
+			</SectionContainer>
 		</div>
 	);
 }

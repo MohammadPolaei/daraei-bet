@@ -8,14 +8,14 @@ export default function SetGoalState({ children }: { children: ReactNode }) {
 			<button
 				className={`border-green-600 text-green-600 ${addAndPluseButtonClasses}`}
 			>
-				<span className="absolute top-[-4.5]">+</span>
+				<span className="absolute top-[-2.5]">+</span>
 			</button>
 			{children}
 
 			<button
 				className={`border-red-600 text-red-600 ${addAndPluseButtonClasses}`}
 			>
-				<span className="absolute top-[-4.5]">-</span>
+				<span className="absolute top-[-2.5]">-</span>
 			</button>
 		</div>
 	);

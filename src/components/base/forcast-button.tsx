@@ -13,7 +13,7 @@ export const ForecastButton: FC<RoundedButtonProps> = ({
 	return (
 		<button
 			type="button"
-			className={`relative w-full bg-(--primary) text-black overflow-hidden rounded-[15px] px-6 py-4 font-bold transition-all ${className}`}
+			className={`relative w-full bg-(--primary) text-black overflow-hidden rounded-[15px] px-6 py-4 font-bold disabled:opacity-50 transition-all cursor-pointer ${className}`}
 		>
 			<span className="relative z-10 flex h-full w-full items-center justify-center text-center text-[18px] leading-none">
 				{children}
