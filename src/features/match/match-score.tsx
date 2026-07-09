@@ -7,7 +7,7 @@ import { useState } from "react";
 export default function MatchScore() {
 	const [activeButton, setActiveButton] = useState("");
 	const buttonsClass =
-		"w-full py-2.5 rounded-[14px] text-[12px] cursor-pointer transition-all duration-500 ease-in-out";
+		"w-full py-2 rounded-[14px] text-[12px] cursor-pointer transition-all duration-500 ease-in-out";
 
 	return (
 		<div className="w-full flex flex-col justify-start gap-0">
@@ -66,8 +66,12 @@ export default function MatchScore() {
 			</div>
 			<div className="w-full pt-3">
 				<SetGoalContainer>
-					<SetGoalState goal={2} />
-					<SetGoalState goal={0} />
+					<SetGoalState>
+						<span className="text-[16px] font-bold">2</span>
+					</SetGoalState>
+					<SetGoalState>
+						<span className="text-[16px] font-bold">0</span>
+					</SetGoalState>
 				</SetGoalContainer>
 			</div>
 		</div>
