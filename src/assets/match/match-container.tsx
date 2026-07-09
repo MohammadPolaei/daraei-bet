@@ -12,7 +12,7 @@ export default function MatchContainer({
 	const maskId = useId();
 
 	return (
-		<div className={`relative -top-1 inline-block w-full h-50 ${className}`}>
+		<div className={`relative inline-block w-full h-40 ${className}`}>
 			<svg
 				width="100"
 				height="39"

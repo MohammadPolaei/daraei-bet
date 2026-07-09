@@ -48,7 +48,7 @@ export default function MatchHeroCard() {
 				<MatchLeverage />
 				<ForecastButton>ویرایش پیش بینی</ForecastButton>
 			</SectionContainer>
-			<div className="relative w-full bg-(--danger-dark)/40 border border-(--danger)/50 text-center text-white/80 text-[12px] overflow-hidden rounded-[15px] px-6 py-4 font-normal transition-all flex justify-center items-center gap-1 my-3">
+			<div className="relative w-full bg-(--danger-dark)/40 border border-(--danger)/50 text-center text-(--text-muted) text-[12px] overflow-hidden rounded-[15px] px-6 py-4 font-normal transition-all flex justify-center items-center gap-1 my-3">
 				<OctagonAlert size={18} className="text-(--danger)" />
 				نتیجه نهایی بازی در 120 دقیقه محاسبه میشود
 			</div>

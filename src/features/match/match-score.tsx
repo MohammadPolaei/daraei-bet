@@ -11,7 +11,7 @@ export default function MatchScore() {
 
 	return (
 		<div className="w-full flex flex-col justify-start gap-0">
-			<div className="relative h-39 flex flex-col justify-start items-center">
+			<div className="relative w-full h-40 top-[-8] flex flex-col justify-start items-center">
 				<MatchContainer>
 					<div className="w-full flex justify-evenly items-center">
 						<div>
@@ -28,7 +28,7 @@ export default function MatchScore() {
 						</div>
 					</div>
 				</MatchContainer>
-				<div className="absolute bottom-3 text-[14px] text-(--text-muted) flex flex-col">
+				<div className="absolute bottom-2.25 text-[13px] text-(--text-muted) flex flex-col">
 					یک چهارم
 				</div>
 			</div>
