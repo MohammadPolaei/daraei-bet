@@ -66,7 +66,7 @@ export default function RootLayout({
 					fontFeatureSettings: '"ss02"',
 					WebkitFontFeatureSettings: '"ss02"',
 				}}
-				className="min-h-screen bg-black antialiased"
+				className="min-h-screen flex flex-col justify-start items-center bg-black antialiased"
 			>
 				{children}
 			</body>

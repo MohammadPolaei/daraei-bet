@@ -12,15 +12,18 @@ export default function MatchContainer({
 	const maskId = useId();
 
 	return (
-		<div className={`relative inline-block w-full h-40 ${className}`}>
+		<div
+			className={`relative flex flex-col justify-center items-center w-full h-40 ${className}`}
+		>
 			<svg
 				width="100"
-				height="39"
-				viewBox="0 0 100 39"
+				height="50"
+				viewBox="0 0 100 46"
 				fill="none"
 				xmlns="http://www.w3.org/2000/svg"
-				className="absolute inset-0 h-full w-full"
+				className="h-full w-full"
 				aria-hidden="true"
+				opacity={"100%"}
 			>
 				<mask id={maskId} fill="white">
 					<path d="M35.3838 6.99902C36.0711 7.75238 37.0437 8.18156 38.0635 8.18164H61.1162C62.1086 8.18162 63.0575 7.77505 63.7422 7.05664L69.0372 1.50016C69.9501 0.542156 71.2157 0 72.539 0H94.6276C97.2991 0 99.4648 2.16569 99.4648 4.83721V34.1628C99.4648 36.8343 97.2991 39 94.6276 39H64.3331C62.6237 39 61.0411 38.0977 60.1704 36.6267L58.8643 34.4199C57.9936 32.949 56.4114 32.047 54.7021 32.0469H45.0117C43.4678 32.047 42.0161 32.7835 41.1055 34.0303L38.9248 37.0159C38.014 38.2628 36.5627 39 35.0186 39H4.83721C2.16569 39 0 36.8343 0 34.1628V4.83721C0 2.16569 2.16569 0 4.83721 0H26.8634C28.2232 0 29.5203 0.572376 30.4368 1.57693L35.3838 6.99902Z" />

@@ -14,8 +14,8 @@ const styles: { [key: string]: CSSProperties } = {
 	card: {
 		position: "relative",
 		width: "100%",
-		height: 90,
-		borderRadius: 20,
+		height: 75,
+		borderRadius: 17,
 		padding: "0 14px",
 		boxSizing: "border-box" as const,
 		display: "flex",
@@ -67,7 +67,7 @@ const styles: { [key: string]: CSSProperties } = {
 		zIndex: 2,
 	},
 	badge: {
-		padding: "4px 10px",
+		padding: "2px 6px",
 		borderRadius: 999,
 		border: "1px solid rgba(156, 226, 62, 0.3)",
 		background: "rgba(109, 165, 31, 0.25)",
@@ -85,13 +85,14 @@ const styles: { [key: string]: CSSProperties } = {
 	title: {
 		color: "#FFFFFF",
 		fontWeight: "700",
-		fontSize: 12,
+		fontSize: 10,
 		margin: 0,
+		letterSpacing: "1px",
 	},
 	subtitle: {
 		color: "rgba(232,234,239,0.5)",
 		fontWeight: "400",
-		fontSize: 12,
+		fontSize: 9,
 		marginTop: 4,
 	},
 	rightIconOuter: {
@@ -135,7 +136,7 @@ export default function MatchDistributionBar() {
 				{/* محتوای متنی وسط */}
 
 				<div style={styles.content}>
-					<div className="w-full flex justify-between items-center relative">
+					<div className="w-full flex justify-start items-center gap-2 relative">
 						<h3 style={styles.title}>پیش‌بینی اتفاقات بازی</h3>
 						<div style={styles.badge}>تا ۱۱۶,۰۰۰ امتیاز</div>
 					</div>

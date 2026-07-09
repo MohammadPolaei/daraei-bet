@@ -77,8 +77,6 @@ export const MultiSegmentProgressBar: FC<MultiSegmentProgressBarProps> = ({
 			{/* بخش پایینی شامل درصدها و نام‌ها */}
 			<div style={styles.labelsWrapper}>
 				{segments.map((segment, index) => {
-					const color = segment.color;
-
 					return (
 						<div key={`label-${index}`} style={styles.labelColumn}>
 							<span
@@ -155,7 +153,7 @@ const styles: Record<string, CSSProperties> = {
 		textAlign: "center",
 	},
 	percentageText: {
-		fontSize: "14px",
+		fontSize: "10px",
 		fontWeight: "bold",
 		marginBottom: "2px",
 		letterSpacing: "-0.5px",

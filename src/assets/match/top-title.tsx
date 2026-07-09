@@ -17,11 +17,12 @@ export const TopTittle: FC<MatchStatusPillProps> = ({
 	const filterId = useId();
 
 	// نسبت اندازه متن نسبت به ارتفاع
-	const fontSize = Math.max(10, Math.round(height * 0.1));
+	const fontSize = Math.max(1, Math.round(height * 0.06));
 
 	return (
 		<div
-			className={`w-full absolute -top-22 right-[-0.25] select-none pointer-events-none flex flex-col justify-start items-center ${className}`}
+			className={`w-full absolute -top-22 right-[-0.25] select-none pointer-events-none flex flex-col justify-start items-center 
+				${className}`}
 			style={{
 				width,
 				height,

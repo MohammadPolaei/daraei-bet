@@ -11,24 +11,24 @@ export default function MatchScore() {
 
 	return (
 		<div className="w-full flex flex-col justify-start gap-0">
-			<div className="relative w-full h-40 top-[-8] flex flex-col justify-start items-center">
+			<div className="relative w-full h-33 top-[-8] flex flex-col justify-start items-center pointer-events-none">
 				<MatchContainer>
 					<div className="w-full flex justify-evenly items-center">
 						<div>
 							<div>LOGO</div>
-							<div>فرانسه</div>
+							<div className="text-[12px]">فرانسه</div>
 						</div>
-						<div className="flex flex-col justify-center items-center">
-							<span>20:30</span>
-							<span>18 تیر</span>
+						<div className="flex flex-col justify-center items-center pb-5">
+							<span className="font-semibold">20:30</span>
+							<span className="text-[10px] text-(--text-muted)">18 تیر</span>
 						</div>
 						<div>
 							<div>LOGO</div>
-							<div>مراکش</div>
+							<div className="text-[12px]">مراکش</div>
 						</div>
 					</div>
 				</MatchContainer>
-				<div className="absolute bottom-2.25 text-[13px] text-(--text-muted) flex flex-col">
+				<div className="absolute bottom-0 text-[12px] text-(--text-muted) flex flex-col">
 					یک چهارم
 				</div>
 			</div>
