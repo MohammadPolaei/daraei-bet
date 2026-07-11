@@ -70,7 +70,7 @@ export const SetGoalContainer: FC<SetGoalContainerProps> = ({
 				</defs>
 			</svg>
 
-			<div className="relative w-full px-7 z-10 flex items-center justify-between pointer-events-none">
+			<div className="relative w-full px-7 z-50 flex items-center justify-between">
 				{children}
 			</div>
 		</div>

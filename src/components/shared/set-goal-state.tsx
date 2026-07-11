@@ -1,19 +1,31 @@
-import { ReactNode } from "react";
+import { Dispatch, ReactNode, SetStateAction } from "react";
 
-export default function SetGoalState({ children }: { children: ReactNode }) {
+export default function SetGoalState({
+	children,
+	min,
+	max,
+	setState,
+}: {
+	children: ReactNode;
+	min: number;
+	max: number;
+	setState: Dispatch<SetStateAction<number>>;
+}) {
 	const addAndPluseButtonClasses =
 		"relative w-4.5 h-4.5 border-1 flex flex-col justify-center items-center rounded-[7px] disabled:opacity-50";
 	return (
 		<div className="flex items-center gap-2.5">
 			<button
-				className={`border-green-600 text-green-600 ${addAndPluseButtonClasses}`}
+				onClick={() => setState((perv) => (perv < max ? perv + 1 : max))}
+				className={`border-green-600 text-green-600 active:scale-110 origin-center transition-all duration-100 ease-in-out ${addAndPluseButtonClasses}`}
 			>
 				<span className="absolute top-[-2.5]">+</span>
 			</button>
-			{children}
+			<span className="w-4 text-center">{children}</span>
 
 			<button
-				className={`border-red-600 text-red-600 ${addAndPluseButtonClasses}`}
+				onClick={() => setState((perv) => (perv > min ? perv - 1 : min))}
+				className={`border-red-600 text-red-600 active:scale-110 origin-center transition-all duration-100 ease-in-out ${addAndPluseButtonClasses}`}
 			>
 				<span className="absolute top-[-2.5]">-</span>
 			</button>

@@ -10,7 +10,7 @@ const styles: { [key: string]: CSSProperties } = {
 		width: "100%",
 		display: "flex",
 		placeItems: "center",
-		padding: "15px 0px 15px 0px",
+		padding: "15px 0px 0px 0px",
 		boxSizing: "border-box" as const, // استفاده از const برای فیکس کردن تایپ
 		fontFamily: "IRANYekanX, system-ui, sans-serif",
 	},

@@ -1,8 +1,10 @@
 import SectionContainer from "@/components/base/section-container";
 import SetGoalState from "@/components/shared/set-goal-state";
 import { Coins, Zap } from "lucide-react";
+import { useState } from "react";
 
 export default function MatchLeverage() {
+	const [leverage, setLeverage] = useState(1);
 	return (
 		<div className="w-full flex flex-col justify-start items-center gap-2">
 			<div className="w-full flex items-center justify-between">
@@ -19,8 +21,8 @@ export default function MatchLeverage() {
 				extraClass="w-full flex justify-between items-center py-2 px-4"
 			>
 				<div>
-					<SetGoalState>
-						<span className="text-[14px] font-semibold">1x</span>
+					<SetGoalState setState={setLeverage} max={10} min={1}>
+						<span className="text-[14px] font-semibold text-center">{`${leverage}x`}</span>
 					</SetGoalState>
 				</div>
 				<div className="text-[11px] text-(--text-main)/80 flex items-center gap-1">

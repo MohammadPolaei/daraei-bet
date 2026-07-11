@@ -18,6 +18,9 @@ export default function MatchScore() {
 		enabled: !!gameId,
 	});
 
+	const [countTeamA, setCountTeamA] = useState(0);
+	const [countTeamB, setCountTeamB] = useState(0);
+
 	const buttonsClass =
 		"w-full py-2 rounded-[14px] text-[12px] cursor-pointer transition-all duration-500 ease-in-out";
 
@@ -83,11 +86,11 @@ export default function MatchScore() {
 			</div>
 			<div className="w-full pt-3">
 				<SetGoalContainer>
-					<SetGoalState>
-						<span className="text-[16px] font-bold">2</span>
+					<SetGoalState setState={setCountTeamA} max={40} min={0}>
+						<span className="text-[16px] font-bold">{countTeamA}</span>
 					</SetGoalState>
-					<SetGoalState>
-						<span className="text-[16px] font-bold">0</span>
+					<SetGoalState setState={setCountTeamB} max={40} min={0}>
+						<span className="text-[16px] font-bold">{countTeamB}</span>
 					</SetGoalState>
 				</SetGoalContainer>
 			</div>
