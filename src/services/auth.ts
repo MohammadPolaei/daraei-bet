@@ -28,3 +28,27 @@ export const sendPhoneAuth = async (
 
 	return data;
 };
+
+export const verifyOTP = async ({
+	mobile,
+	code,
+}: {
+	mobile: string;
+	code: string;
+}) => {
+	const response = await fetch("/api/auth/otp/verify", {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify({ mobile, code }),
+	});
+
+	const data = await response.json();
+
+	if (!response.ok) {
+		throw new Error(data.message || "تایید کد ناموفق بود");
+	}
+
+	return data;
+};
