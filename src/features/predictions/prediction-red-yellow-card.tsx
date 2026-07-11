@@ -12,17 +12,17 @@ export default function PredictionRedYellowCard({
 }) {
 	return (
 		<SectionContainer extraClass="w-full p-3">
-			<div className="w-full flex justify-between items-center gap-60">
+			<div className="w-full flex justify-between items-center">
 				<span className="text-[12px] font-semibold text-(--primary)">
 					سوال 1
 				</span>
 
 				<SectionContainer
-					extraClass="flex justify-start items-center gap-1 max-w-25 py-1"
-					rounded="rounded-[7px]"
+					extraClass="flex justify-start items-center gap-1 max-w-25 py-1 px-3"
+					rounded="rounded-[15px]"
 				>
-					<UsersRound size={10} className="text-(--text-main)" />
-					<span className="text-[8px] text-(--text-main) text-left">352</span>
+					<span className="text-[12px] text-(--text-muted) text-left">352</span>
+					<UsersRound size={14} className="text-(--text-muted)" />
 				</SectionContainer>
 			</div>
 			<div className="py-2">

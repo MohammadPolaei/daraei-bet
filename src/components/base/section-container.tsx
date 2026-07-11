@@ -13,7 +13,7 @@ export default function SectionContainer({
 		<section
 			className={`${extraClass} text-white p-1 ${
 				rounded !== undefined ? rounded : "rounded-[18px]"
-			} border border-gray-700/80 mx-auto relative`}
+			} border border-gray-700/80 relative`}
 		>
 			{children}
 		</section>
