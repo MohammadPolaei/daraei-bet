@@ -1,3 +1,4 @@
+import PredictionCard from "./prediction-card";
 import PredictionRedYellowCard from "./prediction-red-yellow-card";
 
 export default function PredictionSection() {
@@ -21,13 +22,13 @@ export default function PredictionSection() {
 					</span>
 				}
 			/>
-			{/* <PredictionCard
+			<PredictionCard
 				title={
 					<span className="font-bold text-[12px]">
-						تعداد کارت های زرد بازی چندتا خواهدبود ؟
+						یک بازیکن هت‌تریک میکنه؟
 					</span>
 				}
-			/> */}
+			/>
 			{/* <PredictionCard />
 			<PredictionCard />
 			<PredictionCard />
