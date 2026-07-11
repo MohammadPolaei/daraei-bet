@@ -13,7 +13,7 @@ export default function MatchContainer({
 
 	return (
 		<div
-			className={`relative flex flex-col justify-center items-center w-full h-40 ${className}`}
+			className={`relative flex flex-col justify-center items-center w-full h-50 ${className}`}
 		>
 			<svg
 				width="100"
