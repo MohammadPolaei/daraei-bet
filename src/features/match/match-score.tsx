@@ -4,6 +4,7 @@ import SetGoalContainer from "@/assets/match/set-goal-container";
 import SetGoalState from "@/components/shared/set-goal-state";
 import { getGame } from "@/services/get-game";
 import { SingleGameResponse } from "@/types/game-type";
+import { formatMatchTimeDate } from "@/utils/convert-date";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 
@@ -20,6 +21,7 @@ export default function MatchScore() {
 	const buttonsClass =
 		"w-full py-2 rounded-[14px] text-[12px] cursor-pointer transition-all duration-500 ease-in-out";
 
+	const startTime = data?.data?.data.attributes.start_time;
 	return (
 		<div className="w-full flex flex-col justify-start gap-0">
 			<div className="relative w-full h-35 top-[-5] flex flex-col justify-start items-center pointer-events-none">
@@ -30,7 +32,11 @@ export default function MatchScore() {
 							<div className="text-[12px]">فرانسه</div>
 						</div>
 						<div className="flex flex-col justify-center items-center pb-5">
-							<span className="font-semibold">20:30</span>
+							<span className="font-semibold">
+								{startTime !== undefined
+									? formatMatchTimeDate(startTime).time
+									: ""}
+							</span>
 							<span className="text-[10px] text-(--text-muted)">18 تیر</span>
 						</div>
 						<div>

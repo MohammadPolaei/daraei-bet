@@ -3,6 +3,7 @@
 import TopTittle from "@/assets/match/top-title";
 import ForecastButton from "@/components/base/forcast-button";
 import SectionContainer from "@/components/base/section-container";
+import { usePrediction } from "@/context/active-prediction-context";
 import { getGame } from "@/services/get-game";
 import { SingleGameResponse } from "@/types/game-type";
 import { useQuery } from "@tanstack/react-query";
@@ -47,6 +48,8 @@ const predictionData: [ProgressSegment, ProgressSegment, ProgressSegment] = [
 ];
 
 export default function MatchHeroCard() {
+	const { activePrediction, setActivePrediction } = usePrediction();
+
 	const { data, isLoading, isError, error } = useQuery<SingleGameResponse>({
 		queryKey: ["game", gameId],
 		queryFn: () => getGame(gameId),
@@ -77,14 +80,9 @@ export default function MatchHeroCard() {
 			/>
 
 			{/*  */}
-			<MatchDistributionBar />
-			<SectionContainer
-				rounded="rounded-[10px]"
-				extraClass="flex justify-between items-center text-[10px] font-semibold px-3"
-			>
-				<span className="text-(--text-muted)">پیشرفت پاسخ دهی</span>
-				<span className="text-(--primary)">0 از 6</span>
-			</SectionContainer>
+			<MatchDistributionBar
+				onClick={() => setActivePrediction(!activePrediction)}
+			/>
 		</div>
 	);
 }

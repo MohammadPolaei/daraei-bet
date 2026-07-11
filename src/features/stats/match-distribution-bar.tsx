@@ -1,4 +1,7 @@
-import { CSSProperties } from "react";
+"use client";
+
+import { usePrediction } from "@/context/active-prediction-context";
+import { CSSProperties, HTMLAttributes } from "react";
 
 // تعریف تایپ استایل‌ها برای رفع خطای TS
 const styles: { [key: string]: CSSProperties } = {
@@ -109,9 +112,17 @@ const styles: { [key: string]: CSSProperties } = {
 	},
 };
 
-export default function MatchDistributionBar() {
+export default function MatchDistributionBar({
+	...props
+}: HTMLAttributes<HTMLDivElement>) {
+	const { activePrediction } = usePrediction();
 	return (
-		<div dir="rtl" style={styles.wrap}>
+		<div
+			dir="rtl"
+			style={styles.wrap}
+			className="active:scale-95 transition-all duration-300 ease-in-out group"
+			{...props}
+		>
 			<div style={styles.card}>
 				<div style={styles.shine} />
 
@@ -145,7 +156,13 @@ export default function MatchDistributionBar() {
 
 				{/* دکمه فلش سمت چپ */}
 
-				<button type="button" style={styles.leftBtn}>
+				<button
+					type="button"
+					style={styles.leftBtn}
+					className={`${
+						activePrediction ? "rotate-180" : "rotate-0"
+					} transition-all duration-300 ease-in-out group-active:scale-120 origin-center`}
+				>
 					<svg
 						width="14"
 						height="14"
