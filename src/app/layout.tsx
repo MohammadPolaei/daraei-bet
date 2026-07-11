@@ -1,3 +1,4 @@
+import QueryProvider from "@/providers/query-provider";
 import localFont from "next/font/local";
 import "./globals.css";
 
@@ -68,7 +69,7 @@ export default function RootLayout({
 				}}
 				className="min-h-screen flex flex-col justify-start items-center bg-black antialiased"
 			>
-				{children}
+				<QueryProvider>{children}</QueryProvider>
 			</body>
 		</html>
 	);

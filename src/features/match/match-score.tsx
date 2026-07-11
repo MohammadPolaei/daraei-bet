@@ -2,10 +2,21 @@
 import MatchContainer from "@/assets/match/match-container";
 import SetGoalContainer from "@/assets/match/set-goal-container";
 import SetGoalState from "@/components/shared/set-goal-state";
+import { getGame } from "@/services/get-game";
+import { SingleGameResponse } from "@/types/game-type";
+import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
+
+const gameId = "019f21be-02eb-71e6-9327-451c16849d5d";
 
 export default function MatchScore() {
 	const [activeButton, setActiveButton] = useState("");
+	const { data, isLoading, isError, error } = useQuery<SingleGameResponse>({
+		queryKey: ["game", gameId],
+		queryFn: () => getGame(gameId),
+		enabled: !!gameId,
+	});
+
 	const buttonsClass =
 		"w-full py-2 rounded-[14px] text-[12px] cursor-pointer transition-all duration-500 ease-in-out";
 

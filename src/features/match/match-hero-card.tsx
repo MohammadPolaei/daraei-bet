@@ -1,11 +1,18 @@
+"use client";
+
 import TopTittle from "@/assets/match/top-title";
 import ForecastButton from "@/components/base/forcast-button";
 import SectionContainer from "@/components/base/section-container";
+import { getGame } from "@/services/get-game";
+import { SingleGameResponse } from "@/types/game-type";
+import { useQuery } from "@tanstack/react-query";
 import { OctagonAlert } from "lucide-react";
 import MatchDistributionBar from "../stats/match-distribution-bar";
 import MatchLeverage from "./match-leverage";
 import MatchScore from "./match-score";
 import UsersMatchForecast from "./users-match-forecast";
+
+const gameId = "019f21be-02eb-71e6-9327-451c16849d5d";
 
 export interface ProgressSegment {
 	label: string;
@@ -40,6 +47,16 @@ const predictionData: [ProgressSegment, ProgressSegment, ProgressSegment] = [
 ];
 
 export default function MatchHeroCard() {
+	const { data, isLoading, isError, error } = useQuery<SingleGameResponse>({
+		queryKey: ["game", gameId],
+		queryFn: () => getGame(gameId),
+		enabled: !!gameId,
+	});
+
+	if (data?.success) {
+		console.log(data);
+	}
+
 	return (
 		<div className="">
 			<SectionContainer extraClass="flex flex-col justify-center items-center gap-5">
