@@ -1,3 +1,5 @@
+import { formatSmartFixed } from "@/utils/format-smart-fix";
+
 type Props = {
 	yesPercent: number; // عددی بین 0 تا 100
 };
@@ -9,8 +11,8 @@ export function PredictionProgress({ yesPercent }: Props) {
 		<div className="w-full max-w-xl my-4">
 			{/* ردیف لیبل‌ها */}
 			<div className="flex justify-between text-white text-[10px] mb-2 px-1">
-				<span className="font-medium">بله {yesPercent.toFixed(1)}٪</span>
-				<span className="font-medium">خیر {noPercent.toFixed(1)}٪</span>
+				<span className="font-medium">بله {formatSmartFixed(yesPercent)}٪</span>
+				<span className="font-medium">خیر {formatSmartFixed(noPercent)}٪</span>
 			</div>
 
 			{/* کانتینر اصلی نوار */}

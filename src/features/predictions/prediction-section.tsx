@@ -75,48 +75,52 @@ export default function PredictionSection() {
 							: "h-0 opacity-0 pointer-events-none"
 					}`}
 				>
-					{data?.data?.questions.map((q: SpeculativeQuestionItem) => {
-						if (q.question_text == "این بازی چند کارت زرد دارد؟") {
-							return (
-								<motion.div
-									id="first_q"
-									key={q.question_text}
-									variants={itemVariants}
-									className="w-full scroll-mt-24"
-								>
-									<PredictionRedYellowCard
-										question={q}
-										key={"yellow"}
-										card="yellow"
-									/>
-								</motion.div>
-							);
-						} else if (q.question_text == "این بازی چند کارت قرمز دارد؟") {
-							return (
-								<motion.div
-									key={q.question_text}
-									variants={itemVariants}
-									className="w-full"
-								>
-									<PredictionRedYellowCard
-										question={q}
-										key={"red"}
-										card="red"
-									/>
-								</motion.div>
-							);
-						} else {
-							return (
-								<motion.div
-									key={q.question_text}
-									variants={itemVariants}
-									className="w-full"
-								>
-									<PredictionCard question={q} />
-								</motion.div>
-							);
+					{data?.data?.questions.map(
+						(q: SpeculativeQuestionItem, index: number) => {
+							if (q.question_text == "این بازی چند کارت زرد دارد؟") {
+								return (
+									<motion.div
+										id="first_q"
+										key={q.question_text}
+										variants={itemVariants}
+										className="w-full scroll-mt-32"
+									>
+										<PredictionRedYellowCard
+											questionNumber={index + 1}
+											question={q}
+											key={"yellow"}
+											card="yellow"
+										/>
+									</motion.div>
+								);
+							} else if (q.question_text == "این بازی چند کارت قرمز دارد؟") {
+								return (
+									<motion.div
+										key={q.question_text}
+										variants={itemVariants}
+										className="w-full"
+									>
+										<PredictionRedYellowCard
+											questionNumber={index + 1}
+											question={q}
+											key={"red"}
+											card="red"
+										/>
+									</motion.div>
+								);
+							} else {
+								return (
+									<motion.div
+										key={q.question_text}
+										variants={itemVariants}
+										className="w-full"
+									>
+										<PredictionCard questionNumber={index + 1} question={q} />
+									</motion.div>
+								);
+							}
 						}
-					})}
+					)}
 					{/* mock */}
 					{/* <SectionContainer
 						rounded="rounded-[10px]"

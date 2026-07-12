@@ -125,7 +125,7 @@ export default function MatchDistributionBar({
 			{...props}
 		>
 			<Link
-				href={!activePrediction ? "#first_q" : ""}
+				href={!activePrediction ? "#first_q" : "#header"}
 				className="w-full"
 				onClick={() => {
 					document

@@ -1,7 +1,7 @@
 "use client";
-import flag from "@/assets/flag.png";
 import MatchContainer from "@/assets/match/match-container";
 import SetGoalContainer from "@/assets/match/set-goal-container";
+import { FlagIcon } from "@/components/base/flag-icon";
 import SetGoalState from "@/components/shared/set-goal-state";
 import { usePrediction } from "@/context/active-prediction-context";
 import { usePredictionForm } from "@/context/prediction-form-context";
@@ -56,7 +56,7 @@ export default function MatchScore({ gameId }: { gameId: string }) {
 
 	// submit prediction
 
-	const { state, dispatch } = usePredictionForm();
+	const { dispatch } = usePredictionForm();
 
 	return (
 		<div className="w-full flex flex-col justify-start gap-0">
@@ -65,7 +65,23 @@ export default function MatchScore({ gameId }: { gameId: string }) {
 					<div className="w-full flex justify-evenly items-center">
 						<div className="flex flex-col items-center gap-2">
 							<div className="">
-								<img src={flag.src} className="rounded-full w-10 h-10" />
+								{/* <img src={flag.src} className="rounded-full w-10 h-10" /> */}
+								{isLoading ? (
+									<div
+										dir="ltr"
+										className="w-10 h-10 rounded-full flex flex-col justify-center items-center text-center bg-gray-500/40 animate-pulse text-[8px]"
+									/>
+								) : isError ? (
+									<div
+										dir="ltr"
+										className="w-10 h-10 rounded-full flex flex-col justify-center items-center text-center bg-red-500/40 text-[8px]"
+									/>
+								) : (
+									<FlagIcon
+										size={50}
+										code={data?.data?.included[0].attributes.country_code!}
+									/>
+								)}
 							</div>
 							<div className="text-[12px]">{team1}</div>
 						</div>
@@ -95,7 +111,22 @@ export default function MatchScore({ gameId }: { gameId: string }) {
 						</div>
 						<div className="flex flex-col items-center gap-2">
 							<div className="">
-								<img src={flag.src} className="rounded-full w-10 h-10" />
+								{isLoading ? (
+									<div
+										dir="ltr"
+										className="w-10 h-10 rounded-full flex flex-col justify-center items-center text-center bg-gray-500/40 animate-pulse text-[8px]"
+									/>
+								) : isError ? (
+									<div
+										dir="ltr"
+										className="w-10 h-10 rounded-full flex flex-col justify-center items-center text-center bg-red-500/40 text-[8px]"
+									/>
+								) : (
+									<FlagIcon
+										size={50}
+										code={data?.data?.included[1].attributes.country_code!}
+									/>
+								)}
 							</div>
 							<div className="text-[12px]">{team2}</div>
 						</div>

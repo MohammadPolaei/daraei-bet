@@ -9,8 +9,10 @@ import { PredictionProgress } from "./prediction-progress";
 
 export default function PredictionCard({
 	question,
+	questionNumber,
 }: {
 	question: SpeculativeQuestionItem;
+	questionNumber: number;
 }) {
 	const gameId = "019f5546-21df-7019-a943-fc94b1938168";
 	// submit options
@@ -36,7 +38,7 @@ export default function PredictionCard({
 		<SectionContainer extraClass="w-full p-3">
 			<div className="w-full flex justify-between items-center gap-49">
 				<span className="text-[12px] font-semibold text-(--primary)">
-					سوال 1
+					سوال {questionNumber}
 				</span>
 				<SectionContainer
 					extraClass="flex justify-start items-center gap-1 max-w-25 py-1 px-3"
@@ -61,7 +63,7 @@ export default function PredictionCard({
 			<div
 				className={`${
 					selectedOptionId !== "" ? "h-full opacity-100" : "h-0 opacity-0"
-				} w-full flex flex-col justify-between items-center gap-2 transition-all duration-300 ease-in-out`}
+				} w-full flex flex-col justify-between items-center gap-2 transition-all duration-700 ease-in-out`}
 			>
 				<LeverageText />
 				<SectionContainer

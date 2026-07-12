@@ -1,5 +1,6 @@
 "use client";
 
+import { formatSmartFixed } from "@/utils/format-smart-fix";
 import { CSSProperties, FC, useMemo } from "react";
 
 interface PredictionOutcomeItem {
@@ -30,18 +31,6 @@ interface MultiSegmentProgressBarProps {
 	teamB: string;
 	title?: string;
 }
-
-const toPersianNumber = (value: number | string): string => {
-	return new Intl.NumberFormat("fa-IR").format(Number(value));
-};
-
-const toPersianPercentage = (num: number): string => {
-	const persianDigits = ["۰", "۱", "۲", "۳", "۴", "۵", "۶", "۷", "۸", "۹"];
-	return num
-		.toFixed(1)
-		.replace(".", "/")
-		.replace(/\d/g, (x) => persianDigits[parseInt(x, 10)]);
-};
 
 export const MultiSegmentProgressBar: FC<MultiSegmentProgressBarProps> = ({
 	data,
@@ -81,9 +70,7 @@ export const MultiSegmentProgressBar: FC<MultiSegmentProgressBarProps> = ({
 		).label;
 	}, [segments]);
 
-	const totalPredictions = `${toPersianNumber(
-		data ? data.predictions_count : ""
-	)} پیش‌بینی`;
+	const totalPredictions = `${data ? data.predictions_count : ""} پیش‌بینی`;
 
 	return (
 		<div style={styles.cardContainer}>
@@ -125,7 +112,7 @@ export const MultiSegmentProgressBar: FC<MultiSegmentProgressBarProps> = ({
 											: "var(--text-main)",
 								}}
 							>
-								{toPersianPercentage(segment.percentage)}٪
+								{formatSmartFixed(Number(segment.percentage))}٪
 							</span>
 							<span
 								className="transition-colors duration-300"

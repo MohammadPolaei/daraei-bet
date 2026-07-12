@@ -39,6 +39,7 @@ export default function MatchHeroCard() {
 		queryFn: () => getGame(gameId),
 		enabled: !!gameId,
 	});
+	console.log(data);
 
 	// context
 

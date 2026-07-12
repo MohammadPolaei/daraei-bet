@@ -1,4 +1,5 @@
 import QueryProvider from "@/providers/query-provider";
+import "flag-icons/css/flag-icons.min.css";
 import localFont from "next/font/local";
 import "./globals.css";
 

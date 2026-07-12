@@ -9,9 +9,11 @@ import { YellowRedCardMeter } from "./yellow-red-card-meter";
 export default function PredictionRedYellowCard({
 	card,
 	question,
+	questionNumber,
 }: {
 	card: string;
 	question: SpeculativeQuestionItem;
+	questionNumber: number;
 }) {
 	const gameId = "019f5546-21df-7019-a943-fc94b1938168";
 
@@ -30,7 +32,7 @@ export default function PredictionRedYellowCard({
 		<SectionContainer extraClass="w-full p-3">
 			<div className="w-full flex justify-between items-center">
 				<span className="text-[12px] font-semibold text-(--primary)">
-					سوال 1
+					سوال {questionNumber}
 				</span>
 
 				<SectionContainer
@@ -64,7 +66,7 @@ export default function PredictionRedYellowCard({
 					selectedYellowRedOptionId !== ""
 						? "h-full opacity-100"
 						: "h-0 opacity-0"
-				} w-full flex flex-col justify-between items-center gap-2 transition-all duration-300 ease-in-out`}
+				} w-full flex flex-col justify-between items-center gap-2 transition-all duration-700 ease-in-out`}
 			>
 				<LeverageText />
 				<SectionContainer

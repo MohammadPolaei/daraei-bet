@@ -5,7 +5,10 @@ import { Bell, CircleChevronRight } from "lucide-react";
 
 export default function Header() {
 	return (
-		<div className="w-full max-w-93.75 py-5 px-5 z-100 flex justify-between backdrop-blur-[3px] shadow-sm">
+		<div
+			id="header"
+			className="w-full max-w-93.75 py-5 px-5 z-100 flex justify-between backdrop-blur-[3px] shadow-sm"
+		>
 			<div
 				style={{
 					backgroundImage: `url('${headerBg.src}')`,
