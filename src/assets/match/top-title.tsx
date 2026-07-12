@@ -88,7 +88,7 @@ export const TopTittle: FC<MatchStatusPillProps> = ({
 
 			<div className="absolute inset-0 flex items-center justify-center">
 				<span
-					className="whitespace-nowrap font-black tracking-wider text-black z-10 absolute left-[46%]"
+					className="whitespace-nowrap font-black tracking-wider text-black z-10"
 					style={{ fontSize }}
 				>
 					{children}

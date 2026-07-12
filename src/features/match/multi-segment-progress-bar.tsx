@@ -2,38 +2,75 @@
 
 import { CSSProperties, FC, useMemo } from "react";
 
-// تعریف ساختار مشخصات هر بخش (سگمنت)
+interface PredictionOutcomeItem {
+	count: number;
+	percentage: number;
+}
+
+interface GamePredictionData {
+	game_id: string;
+	predictions_count: number;
+	outcomes: {
+		team1_win: PredictionOutcomeItem;
+		draw: PredictionOutcomeItem;
+		team2_win: PredictionOutcomeItem;
+		penalty: PredictionOutcomeItem;
+	};
+}
+
 export interface ProgressSegment {
 	label: string;
 	percentage: number;
 	color: string;
 }
 
-// تعریف پراپ‌های ورودی کامپوننت
 interface MultiSegmentProgressBarProps {
-	segments: [ProgressSegment, ProgressSegment, ProgressSegment]; // دقیقاً ۳ سگمنت دریافت می‌کند
-	totalPredictions?: string; // تعداد پیش‌بینی‌ها (مثلاً "۹۶۵ پیش‌بینی")
-	title?: string; // عنوان کامپوننت (مثلاً "نظر کاربران")
+	data: GamePredictionData | undefined;
+	teamA: string;
+	teamB: string;
+	title?: string;
 }
 
-/**
- * تابع کمکی برای تبدیل اعداد انگلیسی به فارسی به همراه ممیز فارسی (شبیه به طرح تصویر)
- */
+const toPersianNumber = (value: number | string): string => {
+	return new Intl.NumberFormat("fa-IR").format(Number(value));
+};
 
-const toPersianNumbers = (num: number): string => {
+const toPersianPercentage = (num: number): string => {
 	const persianDigits = ["۰", "۱", "۲", "۳", "۴", "۵", "۶", "۷", "۸", "۹"];
 	return num
-		.toFixed(1) // یک رقم اعشار
-		.replace(".", "/") // تبدیل نقطه اعشار به اسلش مطابق تصویر
-		.replace(/\d/g, (x) => persianDigits[parseInt(x)]);
+		.toFixed(1)
+		.replace(".", "/")
+		.replace(/\d/g, (x) => persianDigits[parseInt(x, 10)]);
 };
 
 export const MultiSegmentProgressBar: FC<MultiSegmentProgressBarProps> = ({
-	segments,
-	totalPredictions = "۹۶۵ پیش‌بینی",
+	data,
+	teamA,
+	teamB,
 	title = "نظر کاربران",
 }) => {
-	// محاسبه مجموع کل درصدها برای مقیاس‌دهی دقیق (در صورتی که مجموع دقیقاً ۱۰۰ نباشد)
+	const segments = useMemo<
+		[ProgressSegment, ProgressSegment, ProgressSegment]
+	>(() => {
+		return [
+			{
+				label: teamA,
+				percentage: data ? data.outcomes.team1_win.percentage : 0,
+				color: "#2a398d",
+			},
+			{
+				label: "پنالتی",
+				percentage: data ? data.outcomes.penalty.percentage : 0,
+				color: "#f59e0b",
+			},
+			{
+				label: teamB,
+				percentage: data ? data.outcomes.team2_win.percentage : 0,
+				color: "#ec0b58",
+			},
+		];
+	}, [data]);
+
 	const totalPercentage = useMemo(() => {
 		return segments.reduce((sum, segment) => sum + segment.percentage, 0);
 	}, [segments]);
@@ -44,20 +81,21 @@ export const MultiSegmentProgressBar: FC<MultiSegmentProgressBarProps> = ({
 		).label;
 	}, [segments]);
 
+	const totalPredictions = `${toPersianNumber(
+		data ? data.predictions_count : ""
+	)} پیش‌بینی`;
+
 	return (
 		<div style={styles.cardContainer}>
-			{/* هدر بالایی کارت شامل عنوان و تعداد پیش‌بینی‌ها */}
 			<div style={styles.headerRow}>
 				<span style={styles.titleText}>{title}</span>
 				<span style={styles.predictionsText}>{totalPredictions}</span>
 			</div>
 
-			{/* نوار چندبخشی اصلی */}
 			<div style={styles.progressBarWrapper}>
 				{segments.map((segment, index) => {
 					if (segment.percentage <= 0) return null;
 
-					// محاسبه سهم عرض هر بخش بر اساس درصد واقعی
 					const segmentWidth =
 						(segment.percentage / (totalPercentage || 100)) * 100;
 
@@ -74,7 +112,6 @@ export const MultiSegmentProgressBar: FC<MultiSegmentProgressBarProps> = ({
 				})}
 			</div>
 
-			{/* بخش پایینی شامل درصدها و نام‌ها */}
 			<div style={styles.labelsWrapper}>
 				{segments.map((segment, index) => {
 					return (
@@ -83,12 +120,12 @@ export const MultiSegmentProgressBar: FC<MultiSegmentProgressBarProps> = ({
 								style={{
 									...styles.percentageText,
 									color:
-										segment.label == maxLabel
+										segment.label === maxLabel
 											? segment.color
-											: "text-(--text-main)",
+											: "var(--text-main)",
 								}}
 							>
-								{toPersianNumbers(segment.percentage)}٪
+								{toPersianPercentage(segment.percentage)}٪
 							</span>
 							<span
 								className="transition-colors duration-300"
@@ -104,10 +141,9 @@ export const MultiSegmentProgressBar: FC<MultiSegmentProgressBarProps> = ({
 	);
 };
 
-// استایل‌های بهینه و امن با Inline-Styles برای عدم وابستگی به کتابخانه‌های خارجی
 const styles: Record<string, CSSProperties> = {
 	cardContainer: {
-		direction: "rtl", // جهت کلی متن فارسی راست به چپ
+		direction: "rtl",
 	},
 	headerRow: {
 		display: "flex",
@@ -127,21 +163,21 @@ const styles: Record<string, CSSProperties> = {
 	},
 	progressBarWrapper: {
 		display: "flex",
-		flexDirection: "row", // چیدمان چپ به راست سگمنت‌ها (مراکش، پنالتی، فرانسه)
+		flexDirection: "row",
 		height: "5px",
 		width: "100%",
 		backgroundColor: "#1c1c1e",
 		borderRadius: "9999px",
-		overflow: "hidden", // برای گرد ماندن گوشه‌های سگمنت‌های ابتدا و انتها
+		overflow: "hidden",
 		marginBottom: "5px",
 	},
 	progressSegment: {
 		height: "100%",
-		transition: "width 0.6s cubic-bezier(0.4, 0, 0.2, 1)", // انیمیشن لود شدن نرم
+		transition: "width 0.6s cubic-bezier(0.4, 0, 0.2, 1)",
 	},
 	labelsWrapper: {
 		display: "flex",
-		flexDirection: "row", // هم‌راستا با سگمنت‌های بالا از چپ به راست
+		flexDirection: "row",
 		justifyContent: "space-between",
 		alignItems: "center",
 	},

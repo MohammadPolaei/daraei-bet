@@ -4,6 +4,7 @@ import TopTittle from "@/assets/match/top-title";
 import ForecastButton from "@/components/base/forcast-button";
 import SectionContainer from "@/components/base/section-container";
 import { usePrediction } from "@/context/active-prediction-context";
+import { useGamePrediction } from "@/hooks/use-game-prediction";
 import { getGame } from "@/services/get-game";
 import { SingleGameResponse } from "@/types/game-type";
 import { useQuery } from "@tanstack/react-query";
@@ -13,7 +14,7 @@ import MatchLeverage from "./match-leverage";
 import MatchScore from "./match-score";
 import UsersMatchForecast from "./users-match-forecast";
 
-const gameId = "019f21be-02eb-71e6-9327-451c16849d5d";
+const gameId = "019f21be-02d7-720b-b1d0-36621a02cbaa";
 
 export interface ProgressSegment {
 	label: string;
@@ -28,43 +29,38 @@ export interface MultiSegmentProgressBarProps {
 	title?: string; // عنوان کامپوننت (مثلاً "نظر کاربران")
 }
 
-const predictionData: [ProgressSegment, ProgressSegment, ProgressSegment] = [
-	{
-		label: "فرانسه",
-		percentage: 94.3,
-		color: "#28378d",
-	},
-
-	{
-		label: "ضربات پنالتی",
-		percentage: 1.9,
-		color: "#f1a00a",
-	},
-	{
-		label: "مراکش",
-		percentage: 3.8,
-		color: "#d90452",
-	},
-];
-
 export default function MatchHeroCard() {
 	const { activePrediction, setActivePrediction, winner } = usePrediction();
-
+	// game data
 	const { data, isLoading, isError, error } = useQuery<SingleGameResponse>({
 		queryKey: ["game", gameId],
 		queryFn: () => getGame(gameId),
 		enabled: !!gameId,
 	});
 
-	if (data?.success) {
+	// prediction data
+	const predictionData = useGamePrediction(gameId);
+
+	if (data?.success && predictionData.isSuccess) {
 		console.log(data);
+		console.log(predictionData.data.predictions_count);
 	}
+
+	const status = data?.data?.data.attributes.status;
+
+	const gameStatusPersian =
+		status === "finished" ? "پایان" : status === "in_progress" ? "فعال" : "...";
+
+	// teamA
+	const team1 = data?.data?.included[0].attributes.fa_name;
+	// teamB
+	const team2 = data?.data?.included[1].attributes.fa_name;
 
 	return (
 		<div className="">
 			<SectionContainer extraClass="flex flex-col justify-center items-center gap-4">
-				<TopTittle>فعال</TopTittle>
-				<MatchScore />
+				<TopTittle>{gameStatusPersian}</TopTittle>
+				<MatchScore gameId={gameId} />
 				<MatchLeverage />
 				<ForecastButton disabled={winner == "none"}>
 					ویرایش پیش بینی
@@ -76,9 +72,9 @@ export default function MatchHeroCard() {
 			</div>
 
 			<UsersMatchForecast
-				segments={predictionData}
-				title="نظر کاربران"
-				totalPredictions="۹۶۵ پیش‌بینی"
+				teamA={team1 ?? ""}
+				teamB={team2 ?? ""}
+				data={predictionData.data}
 			/>
 
 			{/*  */}

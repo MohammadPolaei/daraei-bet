@@ -1,15 +1,20 @@
 import SectionContainer from "@/components/base/section-container";
-import { MultiSegmentProgressBarProps } from "./match-hero-card";
+import { GamePredictionData } from "@/types/game-prediction";
 import { MultiSegmentProgressBar } from "./multi-segment-progress-bar";
 
-export default function UsersMatchForecast(data: MultiSegmentProgressBarProps) {
+// data: MultiSegmentProgressBarProps
+export default function UsersMatchForecast({
+	data,
+	teamA,
+	teamB,
+}: {
+	data: GamePredictionData | undefined;
+	teamA: string;
+	teamB: string;
+}) {
 	return (
 		<SectionContainer extraClass="p-3">
-			<MultiSegmentProgressBar
-				segments={data.segments}
-				title={data.title}
-				totalPredictions={data.totalPredictions}
-			/>
+			<MultiSegmentProgressBar teamA={teamA} teamB={teamB} data={data} />
 		</SectionContainer>
 	);
 }

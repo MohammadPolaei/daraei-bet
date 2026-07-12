@@ -1,15 +1,16 @@
 export type ApiSuccessMessage = "Success";
 
+export type UUID = string;
+export type IsoDateString = string;
+
 export type GameType = "games";
+export type TeamType = "teams";
 
 export type GameStatus = "in_progress" | "finished" | "scored";
 export type ScoringMode = "fixed" | "pool";
 export type NetStatus = "disable" | "special" | "enable";
 
-export type IsoDateString = string;
-export type UUID = string;
-
-export type GameAttributes = {
+export interface GameAttributes {
 	team1_id: UUID;
 	team2_id: UUID;
 	start_time: IsoDateString;
@@ -40,26 +41,67 @@ export type GameAttributes = {
 	net_status: NetStatus;
 	created_at: IsoDateString;
 	updated_at: IsoDateString;
-};
+}
 
-export type GameEntity = {
+export interface RelationshipData<TType extends string = string> {
+	id: UUID;
+	type: TType;
+}
+
+export interface GameRelationships {
+	category: {
+		data: RelationshipData | null;
+	};
+	team1: {
+		data: RelationshipData<TeamType>;
+	};
+	team2: {
+		data: RelationshipData<TeamType>;
+	};
+}
+
+export interface GameEntity {
 	id: UUID;
 	type: GameType;
 	attributes: GameAttributes;
-};
+	relationships: GameRelationships;
+}
 
-export type SingleGameSuccessResponse = {
+export interface TeamAttributes {
+	name: string;
+	fa_name: string;
+	country_code: string;
+	group: string;
+	wins: number;
+	draws: number;
+	losses: number;
+	points: number;
+	goal_difference: number;
+	created_at: IsoDateString;
+	updated_at: IsoDateString;
+}
+
+export interface TeamEntity {
+	id: UUID;
+	type: TeamType;
+	attributes: TeamAttributes;
+}
+
+export interface SingleGameResponseData {
+	data: GameEntity;
+	included: TeamEntity[];
+}
+
+export interface SingleGameSuccessResponse {
 	success: true;
 	message: ApiSuccessMessage | string;
-	data: {
-		data: GameEntity;
-	};
-};
+	data: SingleGameResponseData;
+}
 
-export type ApiErrorResponse = {
+export interface ApiErrorResponse {
 	success: false;
 	message: string;
 	data?: null;
-};
+}
 
 export type SingleGameResponse = SingleGameSuccessResponse | ApiErrorResponse;

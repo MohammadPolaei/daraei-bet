@@ -1,26 +1,15 @@
 import { NextRequest, NextResponse } from "next/server";
-
 type RouteParams = {
 	params: Promise<{
 		game: string;
 	}>;
 };
-
 export async function GET(request: NextRequest, { params }: RouteParams) {
 	const token = request.cookies.get("token")?.value;
-
 	try {
 		const { game } = await params;
-
-		if (!game) {
-			return NextResponse.json(
-				{ message: "شناسه بازی الزامی است" },
-				{ status: 400 }
-			);
-		}
-
 		const response = await fetch(
-			`https://staging.api.worldcup.daraei.vip/api/v1/games/${game}?include=team1%2Cteam2%2Ccategory`,
+			`https://staging.api.worldcup.daraei.vip/api/v1/games/${game}/prediction-stats`,
 			{
 				method: "GET",
 				headers: {
@@ -33,7 +22,12 @@ export async function GET(request: NextRequest, { params }: RouteParams) {
 				cache: "no-store",
 			}
 		);
-
+		if (!game) {
+			return NextResponse.json(
+				{ message: "شناسه بازی الزامی است" },
+				{ status: 400 }
+			);
+		}
 		const responseText = await response.text();
 
 		let data;
@@ -54,12 +48,5 @@ export async function GET(request: NextRequest, { params }: RouteParams) {
 		}
 
 		return NextResponse.json(data, { status: 200 });
-	} catch (error) {
-		console.error("Game Details Error:", error);
-
-		return NextResponse.json(
-			{ message: "خطای داخلی سرور در دریافت اطلاعات بازی" },
-			{ status: 500 }
-		);
-	}
+	} catch (error) {}
 }

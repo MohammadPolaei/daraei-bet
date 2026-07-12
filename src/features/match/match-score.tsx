@@ -9,9 +9,7 @@ import { formatMatchTimeDate } from "@/utils/convert-date";
 import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 
-const gameId = "019f21be-02eb-71e6-9327-451c16849d5d";
-
-export default function MatchScore() {
+export default function MatchScore({ gameId }: { gameId: string }) {
 	const [activeButton, setActiveButton] = useState("");
 	const { data, isLoading, isError, error } = useQuery<SingleGameResponse>({
 		queryKey: ["game", gameId],
@@ -43,8 +41,13 @@ export default function MatchScore() {
 
 	const buttonsClass =
 		"w-full py-2 rounded-[14px] text-[12px] cursor-pointer transition-all duration-500 ease-in-out";
-
+	// time
 	const startTime = data?.data?.data.attributes.start_time;
+
+	// teamA
+	const team1 = data?.data?.included[0].attributes.fa_name;
+	// teamB
+	const team2 = data?.data?.included[1].attributes.fa_name;
 	return (
 		<div className="w-full flex flex-col justify-start gap-0">
 			<div className="relative w-full h-35 top-[-5] flex flex-col justify-start items-center pointer-events-none">
@@ -52,19 +55,23 @@ export default function MatchScore() {
 					<div className="w-full flex justify-evenly items-center">
 						<div className="flex flex-col items-center">
 							<div>LOGO</div>
-							<div className="text-[12px]">فرانسه</div>
+							<div className="text-[12px]">{team1}</div>
 						</div>
 						<div className="flex flex-col justify-center items-center pb-5">
 							<span className="font-semibold">
 								{startTime !== undefined
 									? formatMatchTimeDate(startTime).time
-									: "23:30"}
+									: "no time"}
 							</span>
-							<span className="text-[10px] text-(--text-muted)">18 تیر</span>
+							<span className="text-[10px] text-(--text-muted)">
+								{startTime !== undefined
+									? formatMatchTimeDate(startTime).date
+									: "no time"}
+							</span>
 						</div>
 						<div className="flex flex-col items-center">
 							<div>LOGO</div>
-							<div className="text-[12px]">مراکش</div>
+							<div className="text-[12px]">{team2}</div>
 						</div>
 					</div>
 				</MatchContainer>
