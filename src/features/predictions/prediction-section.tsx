@@ -3,7 +3,9 @@
 import { usePrediction } from "@/context/active-prediction-context";
 import PredictionRedYellowCard from "./prediction-red-yellow-card";
 
+import SectionContainer from "@/components/base/section-container";
 import { useQuestion } from "@/hooks/use-question";
+import { SpeculativeQuestionItem } from "@/types/question-response-type";
 import { motion, type Variants } from "framer-motion";
 import PredictionCard from "./prediction-card";
 
@@ -49,6 +51,8 @@ export default function PredictionSection() {
 	const { activePrediction } = usePrediction();
 	const { data, isLoading } = useQuestion(gameId);
 
+	console.log(data);
+
 	return (
 		<div className="w-full">
 			{isLoading ? (
@@ -58,6 +62,10 @@ export default function PredictionSection() {
 				>
 					Loading...
 				</div>
+			) : data?.data?.accepts_answers !== true ? (
+				<SectionContainer extraClass="w-full py-5 text-center text-(--text-muted)/20">
+					مجاز به پاسخ دهی نیستید
+				</SectionContainer>
 			) : (
 				<motion.div
 					variants={containerVariants}
@@ -69,7 +77,7 @@ export default function PredictionSection() {
 							: "h-0 opacity-0 pointer-events-none"
 					}`}
 				>
-					{data.data.questions.map((q: any) => {
+					{data?.data?.questions.map((q: SpeculativeQuestionItem) => {
 						if (q.question_text == "این بازی چند کارت زرد دارد؟") {
 							return (
 								<motion.div
@@ -78,9 +86,10 @@ export default function PredictionSection() {
 									className="w-full"
 								>
 									<PredictionRedYellowCard
-										usersCount={q.options.reduce(
+										question={q}
+										usersCount={q.pool.options.reduce(
 											(sum: any, currentValue: any) => {
-												return sum + Number(currentValue.total_points);
+												return sum + Number(currentValue.participants_count);
 											},
 											0
 										)}
@@ -96,11 +105,16 @@ export default function PredictionSection() {
 							);
 						} else if (q.question_text == "این بازی چند کارت قرمز دارد؟") {
 							return (
-								<motion.div variants={itemVariants} className="w-full">
+								<motion.div
+									key={q.question_text}
+									variants={itemVariants}
+									className="w-full"
+								>
 									<PredictionRedYellowCard
-										usersCount={q.options.reduce(
-											(accumulator: any, currentValue: any) => {
-												return accumulator + currentValue.total_points;
+										question={q}
+										usersCount={q.pool.options.reduce(
+											(sum: any, currentValue: any) => {
+												return sum + Number(currentValue.participants_count);
 											},
 											0
 										)}
@@ -116,8 +130,18 @@ export default function PredictionSection() {
 							);
 						} else {
 							return (
-								<motion.div variants={itemVariants} className="w-full">
+								<motion.div
+									key={q.question_text}
+									variants={itemVariants}
+									className="w-full"
+								>
 									<PredictionCard
+										usersCount={q.pool.options.reduce(
+											(sum: any, currentValue: any) => {
+												return sum + Number(currentValue.participants_count);
+											},
+											0
+										)}
 										yesPercentage={12.5}
 										title={
 											<span className="font-bold text-[12px]">

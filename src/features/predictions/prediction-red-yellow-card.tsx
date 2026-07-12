@@ -1,5 +1,10 @@
 import SectionContainer from "@/components/base/section-container";
+import {
+	SpeculativeQuestionItem,
+	SpeculativeQuestionOption,
+} from "@/types/question-response-type";
 import { UsersRound } from "lucide-react";
+import { useState } from "react";
 import { JSX } from "react/jsx-runtime";
 import { YellowRedCardMeter } from "./yellow-red-card-meter";
 
@@ -7,11 +12,16 @@ export default function PredictionRedYellowCard({
 	title,
 	card,
 	usersCount,
+	question,
 }: {
 	title: JSX.Element;
 	card: string;
 	usersCount: string;
+	question: SpeculativeQuestionItem;
 }) {
+	// question options choose
+	const [selectedYellowOption, setSelectedYellowOption] =
+		useState<SpeculativeQuestionOption | null>(null);
 	return (
 		<SectionContainer extraClass="w-full p-3">
 			<div className="w-full flex justify-between items-center">
@@ -32,7 +42,14 @@ export default function PredictionRedYellowCard({
 			<div className="py-2">
 				<h3>{title}</h3>
 			</div>
-			<YellowRedCardMeter card={card} />
+			<YellowRedCardMeter
+				card={card}
+				options={question.options}
+				max={question.options.length - 1}
+				onChange={(option) => {
+					setSelectedYellowOption(option);
+				}}
+			/>
 		</SectionContainer>
 	);
 }
