@@ -2,11 +2,12 @@
 import MatchContainer from "@/assets/match/match-container";
 import SetGoalContainer from "@/assets/match/set-goal-container";
 import SetGoalState from "@/components/shared/set-goal-state";
+import { usePrediction } from "@/context/active-prediction-context";
 import { getGame } from "@/services/get-game";
 import { SingleGameResponse } from "@/types/game-type";
 import { formatMatchTimeDate } from "@/utils/convert-date";
 import { useQuery } from "@tanstack/react-query";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const gameId = "019f21be-02eb-71e6-9327-451c16849d5d";
 
@@ -20,6 +21,25 @@ export default function MatchScore() {
 
 	const [countTeamA, setCountTeamA] = useState(0);
 	const [countTeamB, setCountTeamB] = useState(0);
+
+	const { winner, setWinner } = usePrediction();
+
+	useEffect(() => {
+		if (countTeamA == countTeamB && activeButton !== "middle") {
+			setWinner("none");
+			setActiveButton("");
+		}
+		if (activeButton == "middle") {
+			setWinner("penalty");
+			return;
+		} else if (countTeamA > countTeamB) {
+			setWinner("teamA");
+			return;
+		} else if (countTeamB > countTeamA) {
+			setWinner("teamB");
+			return;
+		}
+	}, [activeButton, countTeamA, countTeamB]);
 
 	const buttonsClass =
 		"w-full py-2 rounded-[14px] text-[12px] cursor-pointer transition-all duration-500 ease-in-out";
@@ -52,11 +72,15 @@ export default function MatchScore() {
 					یک چهارم
 				</div>
 			</div>
-			<div className="w-full flex justify-between items-center gap-2">
+			<div className={`w-full flex justify-between items-center gap-2`}>
 				<button
-					onClick={() => setActiveButton("right")}
+					onClick={() => {
+						setActiveButton("right");
+						setCountTeamA(1);
+						setCountTeamB(0);
+					}}
 					className={`${
-						activeButton == "right"
+						activeButton == "right" || winner == "teamA"
 							? "bg-(--accent)/20 border border-(--accent)/50 text-(--text-main) font-semibold"
 							: "bg-(--bg-card) text-(--text-muted) border border-white/0 font-semibold"
 					} ${buttonsClass}`}
@@ -64,7 +88,9 @@ export default function MatchScore() {
 					برد فرانسه
 				</button>
 				<button
-					onClick={() => setActiveButton("middle")}
+					onClick={() => {
+						setActiveButton("middle");
+					}}
 					className={`${
 						activeButton == "middle"
 							? "bg-(--accent)/20 border border-(--accent)/50 text-(--text-main)"
@@ -74,9 +100,13 @@ export default function MatchScore() {
 					ضربات پنالتی
 				</button>
 				<button
-					onClick={() => setActiveButton("left")}
+					onClick={() => {
+						setActiveButton("left");
+						setCountTeamA(0);
+						setCountTeamB(1);
+					}}
 					className={`${
-						activeButton == "left"
+						activeButton == "left" || winner == "teamB"
 							? "bg-(--accent)/20 border border-(--accent)/50 text-(--text-main) font-semibold"
 							: "bg-(--bg-card) text-(--text-muted) border border-white/0 font-semibold"
 					} ${buttonsClass}`}
@@ -84,7 +114,11 @@ export default function MatchScore() {
 					برد مراکش
 				</button>
 			</div>
-			<div className="w-full pt-3">
+			<div
+				className={`w-full pt-3 transition-all duration-200 ease-in-out ${
+					winner == "penalty" ? "h-0 opacity-0" : "h-full opacity-100"
+				}`}
+			>
 				<SetGoalContainer>
 					<SetGoalState setState={setCountTeamA} max={40} min={0}>
 						<span className="text-[16px] font-bold">{countTeamA}</span>

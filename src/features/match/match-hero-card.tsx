@@ -48,7 +48,7 @@ const predictionData: [ProgressSegment, ProgressSegment, ProgressSegment] = [
 ];
 
 export default function MatchHeroCard() {
-	const { activePrediction, setActivePrediction } = usePrediction();
+	const { activePrediction, setActivePrediction, winner } = usePrediction();
 
 	const { data, isLoading, isError, error } = useQuery<SingleGameResponse>({
 		queryKey: ["game", gameId],
@@ -66,7 +66,9 @@ export default function MatchHeroCard() {
 				<TopTittle>فعال</TopTittle>
 				<MatchScore />
 				<MatchLeverage />
-				<ForecastButton>ویرایش پیش بینی</ForecastButton>
+				<ForecastButton disabled={winner == "none"}>
+					ویرایش پیش بینی
+				</ForecastButton>
 			</SectionContainer>
 			<div className="relative w-full bg-(--danger-dark)/25 border border-(--danger)/50 text-center text-(--text-muted) text-[11px] overflow-hidden rounded-[11px] px-6 py-3 font-normal transition-all flex justify-center items-center gap-1 my-3">
 				<OctagonAlert size={18} className="text-(--danger)" />

@@ -10,16 +10,21 @@ import {
 type ContextType = {
 	activePrediction: boolean;
 	setActivePrediction: Dispatch<SetStateAction<boolean>>;
+	winner: "teamA" | "penalty" | "teamB" | "none";
+	setWinner: Dispatch<SetStateAction<"teamA" | "penalty" | "teamB" | "none">>;
 };
 
 const PredictionContext = createContext<ContextType | undefined>(undefined);
 
 export function PredictionProvider({ children }: { children: ReactNode }) {
 	const [activePrediction, setActivePrediction] = useState(false);
+	const [winner, setWinner] = useState<"teamA" | "penalty" | "teamB" | "none">(
+		"none"
+	);
 
 	return (
 		<PredictionContext.Provider
-			value={{ activePrediction, setActivePrediction }}
+			value={{ activePrediction, setActivePrediction, winner, setWinner }}
 		>
 			{children}
 		</PredictionContext.Provider>

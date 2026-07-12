@@ -9,9 +9,11 @@ interface RoundedButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 export const ForecastButton: FC<RoundedButtonProps> = ({
 	children,
 	className = "",
+	...props
 }) => {
 	return (
 		<button
+			{...props}
 			type="button"
 			className={`relative w-full bg-(--primary) text-black overflow-hidden rounded-[15px] px-6 py-4 font-bold disabled:opacity-50 transition-all cursor-pointer ${className}`}
 		>

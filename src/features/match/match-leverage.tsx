@@ -5,6 +5,8 @@ import { useState } from "react";
 
 export default function MatchLeverage() {
 	const [leverage, setLeverage] = useState(1);
+	const cost = 100_000 * leverage;
+
 	return (
 		<div className="w-full flex flex-col justify-start items-center gap-2">
 			<div className="w-full flex items-center justify-between">
@@ -27,7 +29,7 @@ export default function MatchLeverage() {
 				</div>
 				<div className="text-[11px] text-(--text-main)/80 flex items-center gap-1">
 					<Coins className="text-amber-500" size={14} />
-					هزینه: 100000 امتیاز
+					هزینه: {new Intl.NumberFormat("fa-IR").format(cost)} امتیاز
 				</div>
 			</SectionContainer>
 		</div>
