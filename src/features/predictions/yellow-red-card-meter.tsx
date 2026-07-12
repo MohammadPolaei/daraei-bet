@@ -1,53 +1,54 @@
 "use client";
 
-import { SpeculativeQuestionOption } from "@/types/question-response-type";
+import {
+	SpeculativeQuestionItem,
+	SpeculativeQuestionOption,
+} from "@/types/question-response-type";
 import { motion } from "framer-motion";
 import { useMemo, useState } from "react";
 
 type Props = {
-	max?: number;
-	value?: number;
+	value?: string;
 	onChange?: (option: SpeculativeQuestionOption, index: number) => void;
 	labels?: string[];
 	card: string;
-	options: SpeculativeQuestionOption[];
+	question: SpeculativeQuestionItem;
 };
 
 export function YellowRedCardMeter({
-	max = 8,
 	value: controlledValue,
 	onChange,
-	labels,
 	card,
-	options,
+	question,
 }: Props) {
+	const sortedOptions = useMemo(() => {
+		return [...question.options].sort(
+			(a, b) => Number(a.value) - Number(b.value)
+		);
+	}, [question.options]);
+
+	const max = sortedOptions.length - 1;
 	const [internalValue, setInternalValue] = useState(0);
 
-	const v = controlledValue !== undefined ? controlledValue : internalValue;
+	const controlledIndex = useMemo(() => {
+		if (!controlledValue) return undefined;
+		const index = sortedOptions.findIndex(
+			(item) => item.id === controlledValue
+		);
+		return index >= 0 ? index : undefined;
+	}, [controlledValue, sortedOptions]);
 
-	const offsetPercent = 100 / (max + 1) / 2;
+	const v = controlledIndex !== undefined ? controlledIndex : internalValue;
 
-	const safeLabels = useMemo(() => {
-		if (labels?.length) return labels;
-
-		const farsiDigits = ["۰", "۱", "۲", "۳", "۴", "۵", "۶", "۷", "۸", "۹"];
-		const arr: string[] = ["صفر"];
-
-		for (let i = 1; i < max; i++) {
-			arr.push(String(i).replace(/\d/g, (d) => farsiDigits[Number(d)]));
-		}
-
-		arr.push(`${String(max).replace(/\d/g, (d) => farsiDigits[Number(d)])}+`);
-
-		return arr;
-	}, [labels, max]);
+	const offsetPercent =
+		sortedOptions.length > 0 ? 100 / sortedOptions.length / 2 : 0;
 
 	const handleValueChange = (newValue: number) => {
-		if (controlledValue === undefined) {
+		if (controlledIndex === undefined) {
 			setInternalValue(newValue);
 		}
 
-		const selectedOption = options[newValue];
+		const selectedOption = sortedOptions[newValue];
 		if (selectedOption) {
 			onChange?.(selectedOption, newValue);
 		}
@@ -66,7 +67,7 @@ export function YellowRedCardMeter({
 					>
 						<motion.div
 							className="absolute top-0 z-20 -translate-x-1/2 -translate-y-full pointer-events-none"
-							animate={{ left: `${(v / max) * 100}%` }}
+							animate={{ left: `${max > 0 ? (v / max) * 100 : 0}%` }}
 							transition={{ type: "spring", stiffness: 380, damping: 30 }}
 						>
 							<KnobVisual value={v} card={card} />
@@ -79,8 +80,6 @@ export function YellowRedCardMeter({
 							step={1}
 							value={v}
 							onChange={(e) => {
-								console.log(e.target.value);
-
 								handleValueChange(Number(e.target.value));
 							}}
 							className="absolute top-1/2 -translate-y-1/2 w-full h-20 opacity-0 cursor-pointer z-30"
@@ -95,18 +94,18 @@ export function YellowRedCardMeter({
 				<div
 					className="mt-3 grid w-full text-(--text-main) text-[9px]"
 					style={{
-						gridTemplateColumns: `repeat(${max + 1}, minmax(0, 1fr))`,
+						gridTemplateColumns: `repeat(${sortedOptions.length}, minmax(0, 1fr))`,
 					}}
 				>
-					{safeLabels.map((t, i) => (
+					{sortedOptions.map((option, i) => (
 						<div
-							key={i}
+							key={option.id}
 							className={`text-center transition-all duration-300 ${
 								v === i ? "text-yellow-400 scale-110" : "opacity-90"
 							}`}
 						>
 							<span dir="rtl" className="block">
-								{t}
+								{option.value}
 							</span>
 						</div>
 					))}

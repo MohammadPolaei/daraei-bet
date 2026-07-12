@@ -124,7 +124,15 @@ export default function MatchDistributionBar({
 			className="active:scale-95 transition-all duration-300 ease-in-out group cursor-pointer"
 			{...props}
 		>
-			<Link href={activePrediction ? "#first_q" : ""} className="w-full">
+			<Link
+				href={!activePrediction ? "#first_q" : ""}
+				className="w-full"
+				onClick={() => {
+					document
+						.getElementById("first_q")
+						?.scrollIntoView({ behavior: "smooth" });
+				}}
+			>
 				<div style={styles.card}>
 					<div style={styles.shine} />
 

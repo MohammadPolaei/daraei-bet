@@ -67,7 +67,7 @@ export default function RootLayout({
 					fontFeatureSettings: '"ss02"',
 					WebkitFontFeatureSettings: '"ss02"',
 				}}
-				className="min-h-screen flex flex-col justify-start items-center bg-black antialiased"
+				className="min-h-fit flex flex-col justify-start items-center bg-black antialiased"
 			>
 				<QueryProvider>{children}</QueryProvider>
 			</body>

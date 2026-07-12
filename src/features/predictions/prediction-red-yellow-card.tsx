@@ -1,9 +1,8 @@
 import SectionContainer from "@/components/base/section-container";
-import {
-	SpeculativeQuestionItem,
-	SpeculativeQuestionOption,
-} from "@/types/question-response-type";
-import { UsersRound } from "lucide-react";
+import LeverageText from "@/components/shared/leverage-text";
+import { useSubmitOptionPrediction } from "@/hooks/use-submit-option";
+import { SpeculativeQuestionItem } from "@/types/question-response-type";
+import { ChevronLeft, UsersRound } from "lucide-react";
 import { useMemo, useState } from "react";
 import { YellowRedCardMeter } from "./yellow-red-card-meter";
 
@@ -14,16 +13,19 @@ export default function PredictionRedYellowCard({
 	card: string;
 	question: SpeculativeQuestionItem;
 }) {
-	// question options choose
-	const [selectedYellowOption, setSelectedYellowOption] =
-		useState<SpeculativeQuestionOption | null>(null);
+	const gameId = "019f5546-21df-7019-a943-fc94b1938168";
 
-	// total count
+	const [selectedYellowRedOptionId, setSelectedYellowRedOptionId] =
+		useState<string>("");
+	const [optionLeverage, setOptionLeverage] = useState(1);
+	const submitMutation = useSubmitOptionPrediction();
+
 	const usersCount = useMemo(() => {
 		return question.pool.options.reduce((sum: any, currentValue: any) => {
 			return sum + Number(currentValue.participants_count);
 		}, 0);
 	}, [question]);
+
 	return (
 		<SectionContainer extraClass="w-full p-3">
 			<div className="w-full flex justify-between items-center">
@@ -43,21 +45,76 @@ export default function PredictionRedYellowCard({
 			</div>
 			<div className="py-2">
 				<h3>
-					{
-						<span className="font-bold text-[12px]">
-							{question.question_text}
-						</span>
-					}
+					<span className="font-bold text-[12px]">
+						{question.question_text}
+					</span>
 				</h3>
 			</div>
 			<YellowRedCardMeter
 				card={card}
-				options={question.options}
-				max={question.options.length - 1}
+				question={question}
+				value={selectedYellowRedOptionId}
 				onChange={(option) => {
-					setSelectedYellowOption(option);
+					setSelectedYellowRedOptionId(option.id);
 				}}
 			/>
+			{/* push answer section */}
+			<div
+				className={`${
+					selectedYellowRedOptionId !== ""
+						? "h-full opacity-100"
+						: "h-0 opacity-0"
+				} w-full flex flex-col justify-between items-center gap-2 transition-all duration-300 ease-in-out`}
+			>
+				<LeverageText />
+				<SectionContainer
+					extraClass="w-full flex items-center gap-1 p-1"
+					rounded="rounded-[10px]"
+				>
+					<button
+						onClick={() => setOptionLeverage(1)}
+						className={`${
+							optionLeverage == 1 ? "bg-(--primary) text-black" : "text-white"
+						} w-full rounded-[7px] py-2  font-semibold text-[15px] cursor-pointer transition-all duration-200 ease-in-out active:scale-90 active:opacity-50 origin-center`}
+					>
+						1x
+					</button>
+					<span>
+						{<ChevronLeft size={10} className="text-(--text-muted)" />}
+					</span>
+					<button
+						onClick={() => setOptionLeverage(2)}
+						className={`${
+							optionLeverage == 2 ? "bg-(--primary) text-black" : "text-white"
+						} w-full rounded-[7px] py-2  font-semibold text-[15px] cursor-pointer transition-all duration-200 ease-in-out active:scale-90 active:opacity-50 origin-center`}
+					>
+						2x
+					</button>
+				</SectionContainer>
+				{submitMutation.isError ? (
+					<span className="w-full text-[12px] text-white/90 text-center p-2 rounded-[7px] bg-red-500/70 animate-pulse">
+						پاسخ قبلا ثبت شده
+					</span>
+				) : null}
+				<button
+					disabled={submitMutation.isPending}
+					onClick={() => {
+						submitMutation.mutateAsync({
+							game_id: gameId,
+							answers: [
+								{
+									question_id: question.id,
+									option_id: selectedYellowRedOptionId,
+									leverage: String(optionLeverage),
+								},
+							],
+						});
+					}}
+					className="w-full bg-(--primary) text-black rounded-[7px] py-2  font-semibold text-[15px] cursor-pointer transition-all duration-200 ease-in-out active:scale-90 active:opacity-50 origin-center disabled:opacity-40"
+				>
+					{submitMutation.isPending ? "در حال ثبت ..." : "ثبت پاسخ"}
+				</button>
+			</div>
 		</SectionContainer>
 	);
 }

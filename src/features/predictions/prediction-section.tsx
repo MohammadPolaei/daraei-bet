@@ -82,7 +82,7 @@ export default function PredictionSection() {
 									id="first_q"
 									key={q.question_text}
 									variants={itemVariants}
-									className="w-full"
+									className="w-full scroll-mt-24"
 								>
 									<PredictionRedYellowCard
 										question={q}

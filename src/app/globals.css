@@ -40,6 +40,9 @@
 	--text-muted: #9c9b9a;
 	--text-gray: #434548;
 }
+html {
+	scroll-behavior: smooth;
+}
 
 body {
 	background-color: var(--bg-primary);
