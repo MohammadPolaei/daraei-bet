@@ -1,8 +1,10 @@
 "use client";
+import flag from "@/assets/flag.png";
 import MatchContainer from "@/assets/match/match-container";
 import SetGoalContainer from "@/assets/match/set-goal-container";
 import SetGoalState from "@/components/shared/set-goal-state";
 import { usePrediction } from "@/context/active-prediction-context";
+import { usePredictionForm } from "@/context/prediction-form-context";
 import { getGame } from "@/services/get-game";
 import { SingleGameResponse } from "@/types/game-type";
 import { formatMatchTimeDate } from "@/utils/convert-date";
@@ -29,12 +31,15 @@ export default function MatchScore({ gameId }: { gameId: string }) {
 		}
 		if (activeButton == "middle") {
 			setWinner("penalty");
+			dispatch({ type: "SET_PENALTY", payload: true });
 			return;
 		} else if (countTeamA > countTeamB) {
 			setWinner("teamA");
+			dispatch({ type: "SET_TEAM1", payload: countTeamA });
 			return;
 		} else if (countTeamB > countTeamA) {
 			setWinner("teamB");
+			dispatch({ type: "SET_TEAM2", payload: countTeamB });
 			return;
 		}
 	}, [activeButton, countTeamA, countTeamB]);
@@ -48,13 +53,20 @@ export default function MatchScore({ gameId }: { gameId: string }) {
 	const team1 = data?.data?.included[0].attributes.fa_name;
 	// teamB
 	const team2 = data?.data?.included[1].attributes.fa_name;
+
+	// submit prediction
+
+	const { state, dispatch } = usePredictionForm();
+
 	return (
 		<div className="w-full flex flex-col justify-start gap-0">
 			<div className="relative w-full h-35 top-[-5] flex flex-col justify-start items-center pointer-events-none">
 				<MatchContainer>
 					<div className="w-full flex justify-evenly items-center">
-						<div className="flex flex-col items-center">
-							<div>LOGO</div>
+						<div className="flex flex-col items-center gap-2">
+							<div className="">
+								<img src={flag.src} className="rounded-full w-10 h-10" />
+							</div>
 							<div className="text-[12px]">{team1}</div>
 						</div>
 						<div className="flex flex-col justify-center items-center pb-5">
@@ -69,8 +81,10 @@ export default function MatchScore({ gameId }: { gameId: string }) {
 									: "no time"}
 							</span>
 						</div>
-						<div className="flex flex-col items-center">
-							<div>LOGO</div>
+						<div className="flex flex-col items-center gap-2">
+							<div className="">
+								<img src={flag.src} className="rounded-full w-10 h-10" />
+							</div>
 							<div className="text-[12px]">{team2}</div>
 						</div>
 					</div>
@@ -92,7 +106,7 @@ export default function MatchScore({ gameId }: { gameId: string }) {
 							: "bg-(--bg-card) text-(--text-muted) border border-white/0 font-semibold"
 					} ${buttonsClass}`}
 				>
-					برد فرانسه
+					<span>برد {team1}</span>
 				</button>
 				<button
 					onClick={() => {
@@ -118,7 +132,7 @@ export default function MatchScore({ gameId }: { gameId: string }) {
 							: "bg-(--bg-card) text-(--text-muted) border border-white/0 font-semibold"
 					} ${buttonsClass}`}
 				>
-					برد مراکش
+					<span>برد {team2}</span>
 				</button>
 			</div>
 			<div

@@ -1,11 +1,21 @@
 import SectionContainer from "@/components/base/section-container";
 import SetGoalState from "@/components/shared/set-goal-state";
+import { usePredictionForm } from "@/context/prediction-form-context";
 import { Coins, Zap } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function MatchLeverage() {
+	const { state, dispatch } = usePredictionForm();
+
 	const [leverage, setLeverage] = useState(1);
 	const cost = 100_000 * leverage;
+
+	useEffect(() => {
+		dispatch({
+			type: "SET_LEVERAGE",
+			payload: Number(leverage),
+		});
+	}, [leverage]);
 
 	return (
 		<div className="w-full flex flex-col justify-start items-center gap-2">

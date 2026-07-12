@@ -50,3 +50,31 @@ export async function GET(request: NextRequest, { params }: RouteParams) {
 		return NextResponse.json(data, { status: 200 });
 	} catch (error) {}
 }
+
+export async function POST(request: NextRequest) {
+	const token = request.cookies.get("token")?.value;
+	const body = await request.json(); // مستقیماً آبجکت نهایی ارسال می‌شود
+
+	try {
+		const response = await fetch(
+			"https://staging.api.worldcup.daraei.vip/api/v1/predictions",
+			{
+				method: "POST",
+				headers: {
+					Authorization: `Bearer ${token}`,
+					Accept: "application/json",
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify(body), // شامل game_id و predictions[]
+			}
+		);
+
+		const result = await response.json();
+		return NextResponse.json(result, { status: response.status });
+	} catch (error) {
+		return NextResponse.json(
+			{ success: false, message: "Server Error" },
+			{ status: 500 }
+		);
+	}
+}

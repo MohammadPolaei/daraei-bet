@@ -1,6 +1,7 @@
 "use client";
 
 import { PredictionProvider } from "@/context/active-prediction-context";
+import { PredictionFormProvider } from "@/context/prediction-form-context";
 import MatchHeroCard from "@/features/match/match-hero-card";
 import PredictionSection from "@/features/predictions/prediction-section";
 import ThisMatchScore from "@/features/stats/this-match-score";
@@ -13,8 +14,10 @@ export default function Home() {
 			<Header />
 			<main className="container mx-auto px-4 py-1 space-y-3">
 				<PredictionProvider>
-					<MatchHeroCard />
-					<PredictionSection />
+					<PredictionFormProvider>
+						<MatchHeroCard />
+						<PredictionSection />
+					</PredictionFormProvider>
 				</PredictionProvider>
 				<ThisMatchScore />
 			</main>

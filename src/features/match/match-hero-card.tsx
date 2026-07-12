@@ -4,7 +4,9 @@ import TopTittle from "@/assets/match/top-title";
 import ForecastButton from "@/components/base/forcast-button";
 import SectionContainer from "@/components/base/section-container";
 import { usePrediction } from "@/context/active-prediction-context";
+import { usePredictionForm } from "@/context/prediction-form-context";
 import { useGamePrediction } from "@/hooks/use-game-prediction";
+import { useSubmitPrediction } from "@/hooks/use-submit-prediction";
 import { getGame } from "@/services/get-game";
 import { SingleGameResponse } from "@/types/game-type";
 import { useQuery } from "@tanstack/react-query";
@@ -14,7 +16,7 @@ import MatchLeverage from "./match-leverage";
 import MatchScore from "./match-score";
 import UsersMatchForecast from "./users-match-forecast";
 
-const gameId = "019f21be-02d7-720b-b1d0-36621a02cbaa";
+const gameId = "019f21be-02eb-71e6-9327-451c16849d5d";
 
 export interface ProgressSegment {
 	label: string;
@@ -37,24 +39,48 @@ export default function MatchHeroCard() {
 		queryFn: () => getGame(gameId),
 		enabled: !!gameId,
 	});
+	// context
 
 	// prediction data
 	const predictionData = useGamePrediction(gameId);
 
-	if (data?.success && predictionData.isSuccess) {
-		console.log(data);
-		console.log(predictionData.data.predictions_count);
-	}
-
 	const status = data?.data?.data.attributes.status;
 
 	const gameStatusPersian =
-		status === "finished" ? "پایان" : status === "in_progress" ? "فعال" : "...";
+		status === "finished"
+			? "پایان"
+			: status === "in_progress"
+			? "فعال"
+			: status === "scored"
+			? "اتمام فرصت"
+			: "...";
 
 	// teamA
 	const team1 = data?.data?.included[0].attributes.fa_name;
 	// teamB
 	const team2 = data?.data?.included[1].attributes.fa_name;
+
+	// submit prediction
+	const { state, dispatch } = usePredictionForm();
+	const submitPrediction = useSubmitPrediction();
+	const handleSubmit = () => {
+		dispatch({
+			type: "SET_GAME_ID",
+			payload: gameId,
+		});
+		const payloadToSend = {
+			...state,
+			game_id: gameId,
+		};
+
+		console.log(payloadToSend);
+
+		submitPrediction.mutate(payloadToSend, {
+			onSuccess: () => {
+				dispatch({ type: "RESET_FORM" });
+			},
+		});
+	};
 
 	return (
 		<div className="">
@@ -62,7 +88,14 @@ export default function MatchHeroCard() {
 				<TopTittle>{gameStatusPersian}</TopTittle>
 				<MatchScore gameId={gameId} />
 				<MatchLeverage />
-				<ForecastButton disabled={winner == "none"}>
+				<ForecastButton
+					onClick={handleSubmit}
+					disabled={
+						winner == "none" ||
+						submitPrediction.isPending ||
+						status !== "in_progress"
+					}
+				>
 					ویرایش پیش بینی
 				</ForecastButton>
 			</SectionContainer>
