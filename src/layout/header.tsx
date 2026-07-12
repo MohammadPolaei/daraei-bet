@@ -25,10 +25,7 @@ export default function Header() {
 				<span className="text-[12px] font-semibold">بازگشت</span>
 			</button>
 			<div className="flex justify-start items-center gap-1">
-				<div
-					className="flex justify-center items-center gap-1 text-[12px] text-(--primary) font-bold
-				rounded-full px-3 h-8 bg-linear-180 from-black via-transparent to-(--primary)/20"
-				>
+				<div className="flex justify-center items-center gap-1 text-[12px] text-(--primary) font-bold rounded-full px-3 h-8 bg-linear-180 from-black via-transparent to-(--primary)/20">
 					<span></span>
 					<span>20,150,960</span>
 				</div>
