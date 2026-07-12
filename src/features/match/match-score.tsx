@@ -71,14 +71,26 @@ export default function MatchScore({ gameId }: { gameId: string }) {
 						</div>
 						<div className="flex flex-col justify-center items-center pb-5">
 							<span className="font-semibold">
-								{startTime !== undefined
-									? formatMatchTimeDate(startTime).time
-									: "no time"}
+								{startTime !== undefined ? (
+									formatMatchTimeDate(startTime).time
+								) : (
+									<div
+										dir="ltr"
+										className="w-15 h-8 rounded-2xl flex flex-col justify-center items-center text-center bg-gray-500/40 animate-pulse text-[8px]"
+									>
+										Loading...
+									</div>
+								)}
 							</span>
 							<span className="text-[10px] text-(--text-muted)">
-								{startTime !== undefined
-									? formatMatchTimeDate(startTime).date
-									: "no time"}
+								{startTime !== undefined ? (
+									formatMatchTimeDate(startTime).date
+								) : (
+									<div
+										dir="ltr"
+										className="w-full h-8 rounded-2xl flex flex-col justify-center items-center text-center bg-gray-500/40 animate-pulse text-[10px]"
+									/>
+								)}
 							</span>
 						</div>
 						<div className="flex flex-col items-center gap-2">
@@ -106,7 +118,16 @@ export default function MatchScore({ gameId }: { gameId: string }) {
 							: "bg-(--bg-card) text-(--text-muted) border border-white/0 font-semibold"
 					} ${buttonsClass}`}
 				>
-					<span>برد {team1}</span>
+					{isLoading ? (
+						<div
+							dir="ltr"
+							className="w-full h-8 rounded-2xl flex flex-col justify-center items-center text-center bg-gray-500/40 animate-pulse"
+						>
+							Loading...
+						</div>
+					) : (
+						<span>برد {team1}</span>
+					)}
 				</button>
 				<button
 					onClick={() => {
@@ -132,7 +153,16 @@ export default function MatchScore({ gameId }: { gameId: string }) {
 							: "bg-(--bg-card) text-(--text-muted) border border-white/0 font-semibold"
 					} ${buttonsClass}`}
 				>
-					<span>برد {team2}</span>
+					{isLoading ? (
+						<div
+							dir="ltr"
+							className="w-full h-8 rounded-2xl flex flex-col justify-center items-center text-center bg-gray-500/40 animate-pulse"
+						>
+							Loading...
+						</div>
+					) : (
+						<span>برد {team2}</span>
+					)}
 				</button>
 			</div>
 			<div

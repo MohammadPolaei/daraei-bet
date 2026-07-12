@@ -1,3 +1,6 @@
+import { getGame } from "@/services/get-game";
+import { SingleGameResponse } from "@/types/game-type";
+import { useQuery } from "@tanstack/react-query";
 import { HTMLAttributes, ReactNode } from "react";
 
 // ۱. تعریف اینترفیس برای پروپ‌ها که از ویژگی‌های div ارث‌بری می‌کند
@@ -21,14 +24,21 @@ const Container = ({
 	);
 };
 
+const gameId = "019f21be-02eb-71e6-9327-451c16849d5d";
+
 export default function ThisMatchScore() {
+	const { data, isLoading, isError, error } = useQuery<SingleGameResponse>({
+		queryKey: ["game", gameId],
+		queryFn: () => getGame(gameId),
+		enabled: !!gameId,
+	});
 	return (
 		<div className="w-full space-y-4">
 			{/* حالا کانتینر می‌تواند هر ویژگی استاندارد مثل onClick یا className اضافه را بپذیرد */}
 			<Container className="flex justify-between items-center">
 				<span className="text-sm opacity-80">امتیاز این بازی</span>
 				<span className="font-bold text-(--primary) text-[16px]">
-					۵۰۰,۰۰۰ امتیاز
+					{data?.data?.data.attributes.score_pool.toLocaleString()} امتیاز
 				</span>
 			</Container>
 

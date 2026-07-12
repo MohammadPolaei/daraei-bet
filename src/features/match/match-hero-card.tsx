@@ -39,6 +39,7 @@ export default function MatchHeroCard() {
 		queryFn: () => getGame(gameId),
 		enabled: !!gameId,
 	});
+
 	// context
 
 	// prediction data
@@ -105,6 +106,7 @@ export default function MatchHeroCard() {
 			</div>
 
 			<UsersMatchForecast
+				loading={isLoading}
 				teamA={team1 ?? ""}
 				teamB={team2 ?? ""}
 				data={predictionData.data}

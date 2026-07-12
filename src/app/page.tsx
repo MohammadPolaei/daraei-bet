@@ -17,9 +17,9 @@ export default function Home() {
 					<PredictionFormProvider>
 						<MatchHeroCard />
 						<PredictionSection />
+						<ThisMatchScore />
 					</PredictionFormProvider>
 				</PredictionProvider>
-				<ThisMatchScore />
 			</main>
 			<MobileNavbar />
 		</div>

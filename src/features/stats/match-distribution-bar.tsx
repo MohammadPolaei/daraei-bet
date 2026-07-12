@@ -120,7 +120,7 @@ export default function MatchDistributionBar({
 		<div
 			dir="rtl"
 			style={styles.wrap}
-			className="active:scale-95 transition-all duration-300 ease-in-out group"
+			className="active:scale-95 transition-all duration-300 ease-in-out group cursor-pointer"
 			{...props}
 		>
 			<div style={styles.card}>
