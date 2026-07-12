@@ -17,7 +17,7 @@ export async function POST(request: Request) {
 
 		// ۳. درخواست به API خارجی
 		const response = await fetch(
-			"https://staging.api.worldcup.daraei.vip/api/v1/auth/otp/send",
+			"https://api.chanchand.com//api/v1/auth/otp/send",
 			{
 				method: "POST",
 				headers: { "Content-Type": "application/json" },

@@ -101,9 +101,18 @@ export default function MatchScore({ gameId }: { gameId: string }) {
 						</div>
 					</div>
 				</MatchContainer>
-				<div className="absolute bottom-0.5 text-[12px] text-(--text-muted) flex flex-col">
-					یک چهارم
-				</div>
+				{isLoading ? (
+					<div
+						dir="ltr"
+						className="w-15 absolute bottom-0 h-4 rounded-2xl flex flex-col justify-center items-center text-center bg-gray-500/40 animate-pulse"
+					>
+						...
+					</div>
+				) : (
+					<div className="absolute bottom-0.5 text-[12px] text-(--text-muted) flex flex-col">
+						{data?.data?.included[2].attributes.fa_name}
+					</div>
+				)}
 			</div>
 			<div className={`w-full flex justify-between items-center gap-2`}>
 				<button

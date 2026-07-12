@@ -6,9 +6,11 @@ import { YellowRedCardMeter } from "./yellow-red-card-meter";
 export default function PredictionRedYellowCard({
 	title,
 	card,
+	usersCount,
 }: {
 	title: JSX.Element;
 	card: string;
+	usersCount: string;
 }) {
 	return (
 		<SectionContainer extraClass="w-full p-3">
@@ -21,7 +23,9 @@ export default function PredictionRedYellowCard({
 					extraClass="flex justify-start items-center gap-1 max-w-25 py-1 px-3"
 					rounded="rounded-[15px]"
 				>
-					<span className="text-[12px] text-(--text-muted) text-left">352</span>
+					<span className="text-[12px] text-(--text-muted) text-left">
+						{usersCount}
+					</span>
 					<UsersRound size={14} className="text-(--text-muted)" />
 				</SectionContainer>
 			</div>

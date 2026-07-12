@@ -16,7 +16,7 @@ import MatchLeverage from "./match-leverage";
 import MatchScore from "./match-score";
 import UsersMatchForecast from "./users-match-forecast";
 
-const gameId = "019f21be-02eb-71e6-9327-451c16849d5d";
+const gameId = "019f5546-21df-7019-a943-fc94b1938168";
 
 export interface ProgressSegment {
 	label: string;
@@ -51,9 +51,11 @@ export default function MatchHeroCard() {
 		status === "finished"
 			? "پایان"
 			: status === "in_progress"
-			? "فعال"
+			? "در حال اجرا"
 			: status === "scored"
 			? "اتمام فرصت"
+			: status === "upcoming"
+			? "فعال"
 			: "...";
 
 	// teamA
@@ -69,12 +71,26 @@ export default function MatchHeroCard() {
 			type: "SET_GAME_ID",
 			payload: gameId,
 		});
-		const payloadToSend = {
-			...state,
-			game_id: gameId,
-		};
 
-		console.log(payloadToSend);
+		const currentState = state;
+
+		let payloadToSend;
+
+		if (currentState.predictions[0].predicts_penalty) {
+			payloadToSend = {
+				game_id: gameId,
+				predictions: [
+					{
+						predicts_penalty: true,
+						leverage: currentState.predictions[0].leverage,
+					},
+				],
+			};
+		} else {
+			payloadToSend = currentState;
+		}
+
+		console.log("Sending data:", payloadToSend);
 
 		submitPrediction.mutate(payloadToSend, {
 			onSuccess: () => {
@@ -94,7 +110,7 @@ export default function MatchHeroCard() {
 					disabled={
 						winner == "none" ||
 						submitPrediction.isPending ||
-						status !== "in_progress"
+						status !== "upcoming"
 					}
 				>
 					ویرایش پیش بینی

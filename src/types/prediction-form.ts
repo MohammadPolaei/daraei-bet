@@ -1,8 +1,12 @@
 // types/prediction-form.ts
 export interface PredictionItem {
 	predicts_penalty: boolean;
-	score_team1_predicted: number;
-	score_team2_predicted: number;
+	score_team1_predicted?: number;
+	score_team2_predicted?: number;
+	leverage: number;
+}
+export interface PredictionPenaltyItem {
+	predicts_penalty: boolean;
 	leverage: number;
 }
 

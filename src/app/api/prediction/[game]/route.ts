@@ -9,7 +9,7 @@ export async function GET(request: NextRequest, { params }: RouteParams) {
 	try {
 		const { game } = await params;
 		const response = await fetch(
-			`https://staging.api.worldcup.daraei.vip/api/v1/games/${game}/prediction-stats`,
+			`https://api.chanchand.com//api/v1/games/${game}/prediction-stats`,
 			{
 				method: "GET",
 				headers: {
@@ -57,7 +57,7 @@ export async function POST(request: NextRequest) {
 
 	try {
 		const response = await fetch(
-			"https://staging.api.worldcup.daraei.vip/api/v1/predictions",
+			"https://api.chanchand.com//api/v1/predictions",
 			{
 				method: "POST",
 				headers: {

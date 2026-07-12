@@ -6,7 +6,7 @@ export type IsoDateString = string;
 export type GameType = "games";
 export type TeamType = "teams";
 
-export type GameStatus = "in_progress" | "finished" | "scored";
+export type GameStatus = "in_progress" | "finished" | "scored" | "upcoming";
 export type ScoringMode = "fixed" | "pool";
 export type NetStatus = "disable" | "special" | "enable";
 

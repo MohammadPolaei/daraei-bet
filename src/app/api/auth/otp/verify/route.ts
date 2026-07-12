@@ -6,7 +6,7 @@ export async function POST(request: Request) {
 		const { mobile, code } = body;
 
 		const response = await fetch(
-			"https://staging.api.worldcup.daraei.vip/api/v1/auth/otp/verify",
+			"https://api.chanchand.com//api/v1/auth/otp/verify",
 			{
 				method: "POST",
 				headers: {
@@ -15,8 +15,8 @@ export async function POST(request: Request) {
 					// اضافه کردن هدرهای مرورگر برای دور زدن سیستم امنیتی
 					"User-Agent":
 						"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
-					Referer: "https://staging.api.worldcup.daraei.vip/",
-					Origin: "https://staging.api.worldcup.daraei.vip/",
+					Referer: "https://api.chanchand.com//",
+					Origin: "https://api.chanchand.com//",
 				},
 				body: JSON.stringify({ mobile, code }),
 			}

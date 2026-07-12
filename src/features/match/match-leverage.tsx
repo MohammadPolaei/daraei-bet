@@ -7,7 +7,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Coins, Zap } from "lucide-react";
 import { useEffect, useState } from "react";
 
-const gameId = "019f21be-02eb-71e6-9327-451c16849d5d";
+const gameId = "019f5546-21df-7019-a943-fc94b1938168";
 
 export default function MatchLeverage() {
 	const { dispatch } = usePredictionForm();
@@ -27,8 +27,6 @@ export default function MatchLeverage() {
 		queryFn: () => getGame(gameId),
 		enabled: !!gameId,
 	});
-
-	console.log(data);
 
 	return (
 		<div className="w-full flex flex-col justify-start items-center gap-2">

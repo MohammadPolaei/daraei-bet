@@ -20,7 +20,7 @@ export async function GET(request: NextRequest, { params }: RouteParams) {
 		}
 
 		const response = await fetch(
-			`https://staging.api.worldcup.daraei.vip/api/v1/games/${game}?include=team1%2Cteam2%2Ccategory`,
+			`https://api.chanchand.com//api/v1/games/${game}?include=team1%2Cteam2%2Ccategory`,
 			{
 				method: "GET",
 				headers: {

@@ -24,7 +24,7 @@ const Container = ({
 	);
 };
 
-const gameId = "019f21be-02eb-71e6-9327-451c16849d5d";
+const gameId = "019f5546-21df-7019-a943-fc94b1938168";
 
 export default function ThisMatchScore() {
 	const { data, isLoading, isError, error } = useQuery<SingleGameResponse>({
@@ -35,12 +35,21 @@ export default function ThisMatchScore() {
 	return (
 		<div className="w-full space-y-4">
 			{/* حالا کانتینر می‌تواند هر ویژگی استاندارد مثل onClick یا className اضافه را بپذیرد */}
-			<Container className="flex justify-between items-center">
-				<span className="text-sm opacity-80">امتیاز این بازی</span>
-				<span className="font-bold text-(--primary) text-[16px]">
-					{data?.data?.data.attributes.score_pool.toLocaleString()} امتیاز
-				</span>
-			</Container>
+			{isLoading ? (
+				<div
+					dir="ltr"
+					className="w-full h-8 rounded-2xl flex flex-col justify-center items-center text-center bg-gray-500/40 animate-pulse"
+				>
+					Loading...
+				</div>
+			) : (
+				<Container className="flex justify-between items-center">
+					<span className="text-sm opacity-80">امتیاز این بازی</span>
+					<span className="font-bold text-(--primary) text-[16px]">
+						{data?.data?.data.attributes.score_pool.toLocaleString()} امتیاز
+					</span>
+				</Container>
+			)}
 
 			{/* بخش پیشرفت (Progress placeholders) */}
 			<div className="flex gap-2 justify-between">

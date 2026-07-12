@@ -9,21 +9,18 @@ interface GameResponse {
 
 export async function GET(request: NextRequest) {
 	try {
-		const response = await fetch(
-			"https://staging.api.worldcup.daraei.vip/api/v1/games",
-			{
-				method: "GET",
-				headers: {
-					"Content-Type": "application/json",
-					Accept: "application/json",
-					// اضافه کردن هدر برای جلوگیری از خطای Go Away
-					"User-Agent":
-						"Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0.0.0 Safari/537.36",
-				},
-				// جلوگیری از کش شدن بیش از حد در صورت نیاز به دیتای زنده
-				cache: "no-store",
-			}
-		);
+		const response = await fetch("https://api.chanchand.com//api/v1/games", {
+			method: "GET",
+			headers: {
+				"Content-Type": "application/json",
+				Accept: "application/json",
+				// اضافه کردن هدر برای جلوگیری از خطای Go Away
+				"User-Agent":
+					"Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0.0.0 Safari/537.36",
+			},
+			// جلوگیری از کش شدن بیش از حد در صورت نیاز به دیتای زنده
+			cache: "no-store",
+		});
 
 		const data: GameResponse = await response.json();
 
