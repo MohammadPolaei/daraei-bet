@@ -9,8 +9,8 @@ export function PredictionProgress({ yesPercent }: Props) {
 		<div className="w-full max-w-xl my-4">
 			{/* ردیف لیبل‌ها */}
 			<div className="flex justify-between text-white text-[10px] mb-2 px-1">
-				<span className="font-medium">بله {yesPercent}٪</span>
-				<span className="font-medium">خیر {noPercent}٪</span>
+				<span className="font-medium">بله {yesPercent.toFixed(1)}٪</span>
+				<span className="font-medium">خیر {noPercent.toFixed(1)}٪</span>
 			</div>
 
 			{/* کانتینر اصلی نوار */}

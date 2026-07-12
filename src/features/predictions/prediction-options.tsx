@@ -1,9 +1,13 @@
 "use client";
 
 import { CircleCheck, CircleX } from "lucide-react";
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 
-export default function PredictionOptions() {
+export default function PredictionOptions({
+	selector,
+}: {
+	selector: Dispatch<SetStateAction<string>>;
+}) {
 	const [active, setActive] = useState("");
 	return (
 		<div className="w-full flex items-center gap-4">

@@ -135,20 +135,7 @@ export default function PredictionSection() {
 									variants={itemVariants}
 									className="w-full"
 								>
-									<PredictionCard
-										usersCount={q.pool.options.reduce(
-											(sum: any, currentValue: any) => {
-												return sum + Number(currentValue.participants_count);
-											},
-											0
-										)}
-										yesPercentage={12.5}
-										title={
-											<span className="font-bold text-[12px]">
-												{q.question_text}
-											</span>
-										}
-									/>
+									<PredictionCard question={q} />
 								</motion.div>
 							);
 						}

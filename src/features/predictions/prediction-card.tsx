@@ -1,18 +1,31 @@
 import SectionContainer from "@/components/base/section-container";
+import { SpeculativeQuestionItem } from "@/types/question-response-type";
 import { UsersRound } from "lucide-react";
-import { JSX } from "react/jsx-runtime";
+import { useMemo, useState } from "react";
 import PredictionOptions from "./prediction-options";
 import { PredictionProgress } from "./prediction-progress";
 
 export default function PredictionCard({
-	title,
-	yesPercentage,
-	usersCount,
+	question,
 }: {
-	title: JSX.Element;
-	yesPercentage: number;
-	usersCount: string;
+	question: SpeculativeQuestionItem;
 }) {
+	const [selectedOption, setSelectedOption] = useState("");
+
+	const usersCount = useMemo(() => {
+		return question.pool.options.reduce((sum: any, currentValue: any) => {
+			return sum + Number(currentValue.participants_count);
+		}, 0);
+	}, [question]);
+
+	const yesPercentageData = useMemo(() => {
+		return (
+			(question.pool.options[0].participants_count /
+				(question.pool.options[1].participants_count +
+					question.pool.options[0].participants_count)) *
+			100
+		);
+	}, [question]);
 	return (
 		<SectionContainer extraClass="w-full p-3">
 			<div className="w-full flex justify-between items-center gap-49">
@@ -30,10 +43,14 @@ export default function PredictionCard({
 				</SectionContainer>
 			</div>
 			<div className="py-2">
-				<h3>{title}</h3>
+				<h3>
+					<span className="font-bold text-[12px]">
+						{question.question_text}
+					</span>
+				</h3>
 			</div>
-			<PredictionOptions />
-			<PredictionProgress yesPercent={yesPercentage} />
+			<PredictionOptions selector={setSelectedOption} />
+			<PredictionProgress yesPercent={yesPercentageData} />
 		</SectionContainer>
 	);
 }
