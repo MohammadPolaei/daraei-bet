@@ -1,6 +1,7 @@
 "use client";
 
 import { usePrediction } from "@/context/active-prediction-context";
+import Link from "next/link";
 import { CSSProperties, HTMLAttributes } from "react";
 
 // تعریف تایپ استایل‌ها برای رفع خطای TS
@@ -123,60 +124,62 @@ export default function MatchDistributionBar({
 			className="active:scale-95 transition-all duration-300 ease-in-out group cursor-pointer"
 			{...props}
 		>
-			<div style={styles.card}>
-				<div style={styles.shine} />
+			<Link href={activePrediction ? "#first_q" : ""} className="w-full">
+				<div style={styles.card}>
+					<div style={styles.shine} />
 
-				{/* آیکن سمت راست */}
+					{/* آیکن سمت راست */}
 
-				<div style={styles.rightIconOuter}>
-					<svg
-						width="20"
-						height="20"
-						viewBox="0 0 24 24"
-						fill="none"
-						stroke="currentColor"
-						strokeWidth="1.5"
-						strokeLinecap="round"
-						strokeLinejoin="round"
-					>
-						<path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 1 1-7.6-10.8 8.38 8.38 0 0 1 3.8.9L21 3.5v8z" />
-						<path d="M11 12h.01M16 12h.01M7 12h.01" strokeWidth="2" />
-					</svg>
-				</div>
-
-				{/* محتوای متنی وسط */}
-
-				<div style={styles.content}>
-					<div className="w-full flex justify-start items-center gap-2 relative">
-						<h3 style={styles.title}>پیش‌بینی اتفاقات بازی</h3>
-						<div style={styles.badge}>تا ۱۱۶,۰۰۰ امتیاز</div>
+					<div style={styles.rightIconOuter}>
+						<svg
+							width="20"
+							height="20"
+							viewBox="0 0 24 24"
+							fill="none"
+							stroke="currentColor"
+							strokeWidth="1.5"
+							strokeLinecap="round"
+							strokeLinejoin="round"
+						>
+							<path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 1 1-7.6-10.8 8.38 8.38 0 0 1 3.8.9L21 3.5v8z" />
+							<path d="M11 12h.01M16 12h.01M7 12h.01" strokeWidth="2" />
+						</svg>
 					</div>
-					<p style={styles.subtitle}>۶ سوال بدون پاسخ</p>
-				</div>
 
-				{/* دکمه فلش سمت چپ */}
+					{/* محتوای متنی وسط */}
 
-				<button
-					type="button"
-					style={styles.leftBtn}
-					className={`${
-						activePrediction ? "rotate-180" : "rotate-0"
-					} transition-all duration-300 ease-in-out group-active:scale-120 origin-center`}
-				>
-					<svg
-						width="14"
-						height="14"
-						viewBox="0 0 24 24"
-						fill="none"
-						stroke="currentColor"
-						strokeWidth="2.5"
-						strokeLinecap="round"
-						strokeLinejoin="round"
+					<div style={styles.content}>
+						<div className="w-full flex justify-start items-center gap-2 relative">
+							<h3 style={styles.title}>پیش‌بینی اتفاقات بازی</h3>
+							<div style={styles.badge}>تا ۱۱۶,۰۰۰ امتیاز</div>
+						</div>
+						<p style={styles.subtitle}>۶ سوال بدون پاسخ</p>
+					</div>
+
+					{/* دکمه فلش سمت چپ */}
+
+					<button
+						type="button"
+						style={styles.leftBtn}
+						className={`${
+							activePrediction ? "rotate-180" : "rotate-0"
+						} transition-all duration-300 ease-in-out group-active:scale-120 origin-center`}
 					>
-						<path d="M18 15l-6-6-6 6" />
-					</svg>
-				</button>
-			</div>
+						<svg
+							width="14"
+							height="14"
+							viewBox="0 0 24 24"
+							fill="none"
+							stroke="currentColor"
+							strokeWidth="2.5"
+							strokeLinecap="round"
+							strokeLinejoin="round"
+						>
+							<path d="M18 15l-6-6-6 6" />
+						</svg>
+					</button>
+				</div>
+			</Link>
 		</div>
 	);
 }

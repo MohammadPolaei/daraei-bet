@@ -51,8 +51,6 @@ export default function PredictionSection() {
 	const { activePrediction } = usePrediction();
 	const { data, isLoading } = useQuestion(gameId);
 
-	console.log(data);
-
 	return (
 		<div className="w-full">
 			{isLoading ? (
@@ -81,25 +79,15 @@ export default function PredictionSection() {
 						if (q.question_text == "این بازی چند کارت زرد دارد؟") {
 							return (
 								<motion.div
+									id="first_q"
 									key={q.question_text}
 									variants={itemVariants}
 									className="w-full"
 								>
 									<PredictionRedYellowCard
 										question={q}
-										usersCount={q.pool.options.reduce(
-											(sum: any, currentValue: any) => {
-												return sum + Number(currentValue.participants_count);
-											},
-											0
-										)}
 										key={"yellow"}
 										card="yellow"
-										title={
-											<span className="font-bold text-[12px]">
-												{q.question_text}
-											</span>
-										}
 									/>
 								</motion.div>
 							);
@@ -112,19 +100,8 @@ export default function PredictionSection() {
 								>
 									<PredictionRedYellowCard
 										question={q}
-										usersCount={q.pool.options.reduce(
-											(sum: any, currentValue: any) => {
-												return sum + Number(currentValue.participants_count);
-											},
-											0
-										)}
 										key={"red"}
 										card="red"
-										title={
-											<span className="font-bold text-[12px]">
-												{q.question_text}
-											</span>
-										}
 									/>
 								</motion.div>
 							);

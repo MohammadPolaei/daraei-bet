@@ -4,7 +4,13 @@ export interface PredictionAnswer {
 	leverage: string;
 }
 
-export interface SubmitPredictionPayload {
+export interface SubmitOptionPredictionPayload {
 	game_id: string;
 	answers: PredictionAnswer[];
+}
+
+export interface SubmitOptionPredictionResponse {
+	success: boolean;
+	message?: string;
+	data?: unknown;
 }

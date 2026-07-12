@@ -1,10 +1,11 @@
 import SectionContainer from "@/components/base/section-container";
+import LeverageText from "@/components/shared/leverage-text";
 import SetGoalState from "@/components/shared/set-goal-state";
 import { usePredictionForm } from "@/context/prediction-form-context";
 import { getGame } from "@/services/get-game";
 import { SingleGameResponse } from "@/types/game-type";
 import { useQuery } from "@tanstack/react-query";
-import { Coins, Zap } from "lucide-react";
+import { Coins } from "lucide-react";
 import { useEffect, useState } from "react";
 
 const gameId = "019f5546-21df-7019-a943-fc94b1938168";
@@ -30,15 +31,7 @@ export default function MatchLeverage() {
 
 	return (
 		<div className="w-full flex flex-col justify-start items-center gap-2">
-			<div className="w-full flex items-center justify-between">
-				<span className="text-[10px] text-(--accent) font-bold flex items-center gap-0.75 relative">
-					<Zap size={12} className="relative top-0" />
-					ضریب
-				</span>
-				<span className="text-[8px] text-(--text-muted)">
-					ضریب بالاتر، هزینه و جایزه بیشتر
-				</span>
-			</div>
+			<LeverageText />
 			<SectionContainer
 				rounded="rounded-[12px]"
 				extraClass="w-full flex justify-between items-center py-2 px-4"

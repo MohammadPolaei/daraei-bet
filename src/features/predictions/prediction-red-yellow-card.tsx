@@ -4,24 +4,26 @@ import {
 	SpeculativeQuestionOption,
 } from "@/types/question-response-type";
 import { UsersRound } from "lucide-react";
-import { useState } from "react";
-import { JSX } from "react/jsx-runtime";
+import { useMemo, useState } from "react";
 import { YellowRedCardMeter } from "./yellow-red-card-meter";
 
 export default function PredictionRedYellowCard({
-	title,
 	card,
-	usersCount,
 	question,
 }: {
-	title: JSX.Element;
 	card: string;
-	usersCount: string;
 	question: SpeculativeQuestionItem;
 }) {
 	// question options choose
 	const [selectedYellowOption, setSelectedYellowOption] =
 		useState<SpeculativeQuestionOption | null>(null);
+
+	// total count
+	const usersCount = useMemo(() => {
+		return question.pool.options.reduce((sum: any, currentValue: any) => {
+			return sum + Number(currentValue.participants_count);
+		}, 0);
+	}, [question]);
 	return (
 		<SectionContainer extraClass="w-full p-3">
 			<div className="w-full flex justify-between items-center">
@@ -40,7 +42,13 @@ export default function PredictionRedYellowCard({
 				</SectionContainer>
 			</div>
 			<div className="py-2">
-				<h3>{title}</h3>
+				<h3>
+					{
+						<span className="font-bold text-[12px]">
+							{question.question_text}
+						</span>
+					}
+				</h3>
 			</div>
 			<YellowRedCardMeter
 				card={card}

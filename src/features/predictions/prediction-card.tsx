@@ -1,6 +1,8 @@
 import SectionContainer from "@/components/base/section-container";
+import LeverageText from "@/components/shared/leverage-text";
+import { useSubmitOptionPrediction } from "@/hooks/use-submit-option";
 import { SpeculativeQuestionItem } from "@/types/question-response-type";
-import { UsersRound } from "lucide-react";
+import { ChevronLeft, UsersRound } from "lucide-react";
 import { useMemo, useState } from "react";
 import PredictionOptions from "./prediction-options";
 import { PredictionProgress } from "./prediction-progress";
@@ -10,7 +12,11 @@ export default function PredictionCard({
 }: {
 	question: SpeculativeQuestionItem;
 }) {
-	const [selectedOption, setSelectedOption] = useState("");
+	const gameId = "019f5546-21df-7019-a943-fc94b1938168";
+	// submit options
+	const submitMutation = useSubmitOptionPrediction();
+	const [selectedOptionId, setSelectedOptionId] = useState("");
+	const [optionLeverage, setOptionLeverage] = useState(1);
 
 	const usersCount = useMemo(() => {
 		return question.pool.options.reduce((sum: any, currentValue: any) => {
@@ -49,8 +55,63 @@ export default function PredictionCard({
 					</span>
 				</h3>
 			</div>
-			<PredictionOptions selector={setSelectedOption} />
+			<PredictionOptions selector={setSelectedOptionId} question={question} />
 			<PredictionProgress yesPercent={yesPercentageData} />
+			{/* push answer section */}
+			<div
+				className={`${
+					selectedOptionId !== "" ? "h-full opacity-100" : "h-0 opacity-0"
+				} w-full flex flex-col justify-between items-center gap-2 transition-all duration-300 ease-in-out`}
+			>
+				<LeverageText />
+				<SectionContainer
+					extraClass="w-full flex items-center gap-1 p-1"
+					rounded="rounded-[10px]"
+				>
+					<button
+						onClick={() => setOptionLeverage(1)}
+						className={`${
+							optionLeverage == 1 ? "bg-(--primary) text-black" : "text-white"
+						} w-full rounded-[7px] py-2  font-semibold text-[15px] cursor-pointer transition-all duration-200 ease-in-out active:scale-90 active:opacity-50 origin-center`}
+					>
+						1x
+					</button>
+					<span>
+						{<ChevronLeft size={10} className="text-(--text-muted)" />}
+					</span>
+					<button
+						onClick={() => setOptionLeverage(2)}
+						className={`${
+							optionLeverage == 2 ? "bg-(--primary) text-black" : "text-white"
+						} w-full rounded-[7px] py-2  font-semibold text-[15px] cursor-pointer transition-all duration-200 ease-in-out active:scale-90 active:opacity-50 origin-center`}
+					>
+						2x
+					</button>
+				</SectionContainer>
+				{submitMutation.isError ? (
+					<span className="w-full text-[12px] text-white/90 text-center p-2 rounded-[7px] bg-red-500/70 animate-pulse">
+						پاسخ قبلا ثبت شده
+					</span>
+				) : null}
+				<button
+					disabled={submitMutation.isPending}
+					onClick={() => {
+						submitMutation.mutateAsync({
+							game_id: gameId,
+							answers: [
+								{
+									question_id: question.id,
+									option_id: selectedOptionId,
+									leverage: String(optionLeverage),
+								},
+							],
+						});
+					}}
+					className="w-full bg-(--primary) text-black rounded-[7px] py-2  font-semibold text-[15px] cursor-pointer transition-all duration-200 ease-in-out active:scale-90 active:opacity-50 origin-center disabled:opacity-40"
+				>
+					{submitMutation.isPending ? "در حال ثبت ..." : "ثبت پاسخ"}
+				</button>
+			</div>
 		</SectionContainer>
 	);
 }
