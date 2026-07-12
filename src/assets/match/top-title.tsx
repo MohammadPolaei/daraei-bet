@@ -10,14 +10,14 @@ export const TopTittle: FC<MatchStatusPillProps> = ({
 	children,
 	className = "w-full",
 	width = "100%",
-	height = 202,
+	height = 200,
 	style,
 	...props
 }) => {
 	const filterId = useId();
 
 	// نسبت اندازه متن نسبت به ارتفاع
-	const fontSize = Math.max(1, Math.round(height * 0.06));
+	const fontSize = Math.max(1, Math.round(height * 0.055));
 
 	return (
 		<div
@@ -88,7 +88,7 @@ export const TopTittle: FC<MatchStatusPillProps> = ({
 
 			<div className="absolute inset-0 flex items-center justify-center">
 				<span
-					className="whitespace-nowrap font-black tracking-wider text-black z-10"
+					className="whitespace-nowrap font-black tracking-wider text-black z-10 absolute left-[46%]"
 					style={{ fontSize }}
 				>
 					{children}

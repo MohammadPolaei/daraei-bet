@@ -50,7 +50,7 @@ export default function MatchScore() {
 			<div className="relative w-full h-35 top-[-5] flex flex-col justify-start items-center pointer-events-none">
 				<MatchContainer>
 					<div className="w-full flex justify-evenly items-center">
-						<div>
+						<div className="flex flex-col items-center">
 							<div>LOGO</div>
 							<div className="text-[12px]">فرانسه</div>
 						</div>
@@ -58,11 +58,11 @@ export default function MatchScore() {
 							<span className="font-semibold">
 								{startTime !== undefined
 									? formatMatchTimeDate(startTime).time
-									: ""}
+									: "23:30"}
 							</span>
 							<span className="text-[10px] text-(--text-muted)">18 تیر</span>
 						</div>
-						<div>
+						<div className="flex flex-col items-center">
 							<div>LOGO</div>
 							<div className="text-[12px]">مراکش</div>
 						</div>
@@ -115,7 +115,7 @@ export default function MatchScore() {
 				</button>
 			</div>
 			<div
-				className={`w-full pt-3 transition-all duration-200 ease-in-out ${
+				className={`w-full pt-2 transition-all duration-200 ease-in-out ${
 					winner == "penalty" ? "h-0 opacity-0" : "h-full opacity-100"
 				}`}
 			>

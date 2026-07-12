@@ -62,7 +62,7 @@ export default function MatchHeroCard() {
 
 	return (
 		<div className="">
-			<SectionContainer extraClass="flex flex-col justify-center items-center gap-5">
+			<SectionContainer extraClass="flex flex-col justify-center items-center gap-4">
 				<TopTittle>فعال</TopTittle>
 				<MatchScore />
 				<MatchLeverage />
