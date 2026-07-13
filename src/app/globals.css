@@ -152,3 +152,40 @@ body {
 .animate-signal-shadow {
 	animation: signalShadow 3s infinite ease-in-out;
 }
+
+/* notification animation */
+
+@keyframes notificationAnimation {
+	0% {
+		transform: rotate(0deg) scale(1);
+	}
+	12.5% {
+		transform: rotate(15deg) scale(1);
+	}
+	25% {
+		transform: rotate(-15deg) scale(1);
+	}
+	37.5% {
+		transform: rotate(10deg) scale(1.2);
+	}
+	50% {
+		transform: rotate(-10deg) scale(1.08);
+	}
+	62.5% {
+		transform: rotate(7deg) scale(1.1);
+	}
+	75% {
+		transform: rotate(-3deg) scale(1.05);
+	}
+	87.5% {
+		transform: rotate(0deg) scale(1);
+	}
+	100% {
+		transform: rotate(0deg) scale(1);
+	}
+}
+
+.animation-notification {
+	animation: notificationAnimation 2.2s infinite ease-in-out;
+	transform-origin: center;
+}

@@ -27,17 +27,20 @@ export default function Header() {
 				onClick={() => {
 					window.history.back();
 				}}
-				className="flex items-center gap-1"
+				className="flex items-center gap-1 cursor-pointer"
 			>
 				<CircleChevronRight size={25} className="text-(--primary)" />
 				<span className="text-[12px] font-semibold">بازگشت</span>
 			</button>
 
 			<div className="flex items-center justify-start gap-1">
-				<div className="flex h-8 items-center justify-center gap-1 rounded-full bg-linear-180 from-black via-transparent to-(--primary)/20 px-3 text-[12px] font-bold text-(--primary)">
+				<div className="flex h-8 items-center justify-center gap-1 rounded-full bg-linear-180 from-black via-transparent to-(--primary)/20 px-3 text-[12px] font-bold text-(--primary) cursor-pointer">
 					<span>20,150,960</span>
 				</div>
-				<div className="flex h-8 w-8 flex-col items-center justify-center rounded-full bg-linear-180 from-black via-transparent to-(--primary)/20">
+				<div className="flex h-7 w-7 flex-col items-center justify-center rounded-full bg-linear-180 from-black via-transparent to-(--primary)/20 animation-notification relative">
+					<span className="absolute top-[-5] left-[-5] w-4 h-4 text-[8px] font-semibold bg-red-400 flex flex-col justify-center items-center rounded-full">
+						1
+					</span>
 					<Bell size={14} className="text-(--primary)" />
 				</div>
 			</div>
