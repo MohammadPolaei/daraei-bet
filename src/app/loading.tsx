@@ -2,7 +2,7 @@ export default function Loading() {
 	return (
 		<div
 			dir="rtl"
-			className="min-h-screen w-full bg-[#121212] px-4 py-3 text-white"
+			className="min-h-screen max-w-93.75 w-full bg-[#121212] px-4 py-3 text-white"
 		>
 			{/* Header */}
 			<header className="mb-3 flex items-center justify-between">
