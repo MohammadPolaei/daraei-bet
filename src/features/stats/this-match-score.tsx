@@ -51,15 +51,15 @@ export default function ThisMatchScore() {
 
 			{/* بخش پیشرفت (Progress placeholders) */}
 			<div className="flex gap-2 justify-between">
-				<Container className="flex flex-col justify-evenly items-center gap-2 w-26">
+				<Container className="flex flex-col justify-evenly items-center gap-2 min-w-26 w-full">
 					<span className="text-(--primary)">400,000</span>
 					<span className="text-[10px]">نتیجه دقیق</span>
 				</Container>
-				<Container className="flex flex-col justify-evenly items-center gap-2 w-26">
+				<Container className="flex flex-col justify-evenly items-center gap-2 min-w-26 w-full">
 					<span>100,000</span>
 					<span className="text-[10px]">نتیجه درست</span>
 				</Container>
-				<Container className="flex flex-col justify-evenly items-center gap-2 w-26">
+				<Container className="flex flex-col justify-evenly items-center gap-2 min-w-26 w-full">
 					<span dir="ltr">{`+${10}%`}</span>
 					<span className="text-[10px]">دعوت از دوستان</span>
 				</Container>
