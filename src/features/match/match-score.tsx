@@ -168,7 +168,7 @@ export default function MatchScore({ gameId }: { gameId: string }) {
 
 	return (
 		<div className="w-full flex flex-col justify-start gap-0">
-			<div className="relative w-full h-35 top-[-5] flex flex-col justify-start items-center pointer-events-none">
+			<div className="relative w-full h-full top-[-5] flex flex-col justify-start items-center pointer-events-none">
 				<MatchContainer>
 					<div className="w-full flex justify-evenly items-center">
 						<div className="flex flex-col items-center gap-2">
@@ -199,7 +199,7 @@ export default function MatchScore({ gameId }: { gameId: string }) {
 							<div className="text-[12px]">{team1}</div>
 						</div>
 
-						<div className="flex flex-col justify-center items-center pb-5">
+						<div className="flex flex-col justify-center items-center pb-0">
 							<span className="font-semibold">
 								{startTime !== undefined ? (
 									formatMatchTimeDate(startTime).time
@@ -258,13 +258,13 @@ export default function MatchScore({ gameId }: { gameId: string }) {
 						className="w-15 absolute bottom-0.5 h-5 rounded-2xl flex flex-col justify-center items-center text-center bg-gray-500/40 animate-pulse"
 					/>
 				) : (
-					<div className="absolute bottom-0.5 text-[12px] text-(--text-muted) flex flex-col">
+					<div className="absolute bottom-11 medium-mobile:bottom-10.25 text-[12px] text-(--text-muted) flex flex-col">
 						{data?.data?.included?.[2]?.attributes.fa_name}
 					</div>
 				)}
 			</div>
 
-			<div className="w-full flex justify-between items-center gap-2">
+			<div className="w-full flex justify-between items-center gap-2 -mt-10 medium-mobile:-mt-8">
 				<button
 					aria-label="برد تیم اول"
 					onClick={() => {

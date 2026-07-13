@@ -80,7 +80,6 @@ const styles: { [key: string]: CSSProperties } = {
 		background: "rgba(109, 165, 31, 0.25)",
 		color: "#A7E52B",
 		fontWeight: "700",
-		fontSize: 8,
 		textShadow: `
       0 0 4px rgba(167, 229, 43, 0.6), 
       0 0 12px rgba(167, 229, 43, 0.3)
@@ -153,9 +152,12 @@ export default function MatchDistributionBar({
 					{/* محتوای متنی وسط */}
 
 					<div style={styles.content}>
-						<div className="w-full flex justify-start items-center gap-2 relative">
+						<div className="w-full flex flex-col medium-mobile:flex-row justify-start items-start medium-mobile:items-center gap-2 relative">
 							<h3 style={styles.title}>پیش‌بینی اتفاقات بازی</h3>
-							<div style={styles.badge} className="animation-scale-up">
+							<div
+								style={styles.badge}
+								className="animation-scale-up text-[8px]"
+							>
 								تا ۱۱۶,۰۰۰ امتیاز
 							</div>
 						</div>

@@ -49,6 +49,12 @@ body {
 	color: var(--text-main);
 }
 
+/* break points */
+@theme {
+	--breakpoint-small-mobile: 320px;
+	--breakpoint-medium-mobile: 410px;
+}
+
 /* prediction section BOX */
 
 @keyframes shineMove {

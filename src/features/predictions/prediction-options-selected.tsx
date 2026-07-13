@@ -21,7 +21,7 @@ export default function PredictionOptionsSelected({
 					${
 						isYesOption
 							? "bg-(--primary)/5 border-(--primary)/50 text-(--primary) cursor-pointer"
-							: "border-gray-500/50"
+							: "border-gray-500/50 opacity-20"
 					}
 					`}
 			>

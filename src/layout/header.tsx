@@ -5,7 +5,7 @@ import headerBg from "@/assets/header-bg.png";
 import { Bell, CircleChevronRight } from "lucide-react";
 import Image from "next/image";
 
-const gameId = "019f413d-6c50-715e-9fe1-b7986596076a";
+const gameId = "019f5546-21df-7019-a943-fc94b1938168";
 
 export default function Header() {
 	// const { data } = useUserProfile();
@@ -14,7 +14,7 @@ export default function Header() {
 	return (
 		<div
 			id="header"
-			className="relative z-10 flex w-full max-w-93.75 justify-between px-5 py-5 backdrop-blur-[3px] shadow-sm"
+			className="relative z-10 flex w-full max-w-md justify-between px-5 py-5 backdrop-blur-[3px] shadow-sm"
 		>
 			<div className="w-full absolute inset-0 -top-42 -z-10 overflow-hidden pointer-events-none flex flex-col justify-start items-center">
 				<Image

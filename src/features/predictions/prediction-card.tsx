@@ -15,7 +15,7 @@ export default function PredictionCard({
 	question: SpeculativeQuestionItem;
 	questionNumber: number;
 }) {
-	const gameId = "019f413d-6c50-715e-9fe1-b7986596076a";
+	const gameId = "019f5546-21df-7019-a943-fc94b1938168";
 	// submit options
 	const submitMutation = useSubmitOptionPrediction();
 	const [selectedOptionId, setSelectedOptionId] = useState("");
@@ -43,12 +43,13 @@ export default function PredictionCard({
 	}, [question]);
 	return (
 		<SectionContainer extraClass="w-full p-3">
-			<div className="w-full flex justify-between items-center gap-49">
-				<span className="text-[12px] font-semibold text-(--primary)">
+			<div className="w-full flex justify-between items-center">
+				<span className="text-[12px] min-w-10 font-semibold text-(--primary)">
 					سوال {questionNumber}
 				</span>
+
 				<SectionContainer
-					extraClass="flex justify-start items-center gap-1 max-w-25 py-1 px-3"
+					extraClass="flex justify-start items-center gap-1 min-w-15 max-w-25 py-1 px-3"
 					rounded="rounded-[15px]"
 				>
 					<span className="text-[12px] text-(--text-muted) text-left">

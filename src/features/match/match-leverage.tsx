@@ -8,7 +8,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Coins } from "lucide-react";
 import { useEffect, useState } from "react";
 
-const gameId = "019f413d-6c50-715e-9fe1-b7986596076a";
+const gameId = "019f5546-21df-7019-a943-fc94b1938168";
 
 export default function MatchLeverage() {
 	const { dispatch } = usePredictionForm();
