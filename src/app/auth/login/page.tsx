@@ -76,6 +76,7 @@ export default function LogIn() {
 						)}
 
 						<button
+							aria-label="ورود به حساب"
 							type="submit"
 							disabled={isLoading}
 							className="bg-(--primary) py-3 text-black text-[16px] font-semibold w-full rounded-[14px] disabled:opacity-50 transition-opacity"

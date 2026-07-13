@@ -71,6 +71,7 @@ export default function PredictionCard({
 					rounded="rounded-[10px]"
 				>
 					<button
+						aria-label="افزودن اهرم"
 						onClick={() => setOptionLeverage(1)}
 						className={`${
 							optionLeverage == 1 ? "bg-(--primary) text-black" : "text-white"
@@ -82,6 +83,7 @@ export default function PredictionCard({
 						{<ChevronLeft size={10} className="text-(--text-muted)" />}
 					</span>
 					<button
+						aria-label="کاهش اهرم"
 						onClick={() => setOptionLeverage(2)}
 						className={`${
 							optionLeverage == 2 ? "bg-(--primary) text-black" : "text-white"
@@ -96,6 +98,7 @@ export default function PredictionCard({
 					</span>
 				) : null}
 				<button
+					aria-label="ثبت پاسخ"
 					disabled={submitMutation.isPending}
 					onClick={() => {
 						submitMutation.mutateAsync({

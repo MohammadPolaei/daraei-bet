@@ -20,6 +20,7 @@ export default function PredictionOptions({
 	return (
 		<div className="w-full flex items-center gap-4 pt-2">
 			<button
+				aria-label="بله"
 				onClick={() => {
 					selector(yesOption.id);
 					setActive("بله");
@@ -41,6 +42,7 @@ export default function PredictionOptions({
 				<span className="w-full">{yesOption.text}</span>
 			</button>
 			<button
+				aria-label="خیر"
 				onClick={() => {
 					selector(noOption.id);
 					setActive("خیر");

@@ -74,6 +74,7 @@ export default function PredictionRedYellowCard({
 					rounded="rounded-[10px]"
 				>
 					<button
+						aria-label="افزایش اهرم"
 						onClick={() => setOptionLeverage(1)}
 						className={`${
 							optionLeverage == 1 ? "bg-(--primary) text-black" : "text-white"
@@ -85,6 +86,7 @@ export default function PredictionRedYellowCard({
 						{<ChevronLeft size={10} className="text-(--text-muted)" />}
 					</span>
 					<button
+						aria-label="کاهش اهرم"
 						onClick={() => setOptionLeverage(2)}
 						className={`${
 							optionLeverage == 2 ? "bg-(--primary) text-black" : "text-white"
@@ -99,6 +101,7 @@ export default function PredictionRedYellowCard({
 					</span>
 				) : null}
 				<button
+					aria-label="ارسال پاسخ"
 					disabled={submitMutation.isPending}
 					onClick={() => {
 						submitMutation.mutateAsync({

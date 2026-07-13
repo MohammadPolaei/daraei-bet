@@ -1,5 +1,6 @@
 import QueryProvider from "@/providers/query-provider";
 import "flag-icons/css/flag-icons.min.css";
+import { Metadata } from "next";
 import localFont from "next/font/local";
 import { Toaster } from "sonner";
 import "./globals.css";
@@ -55,6 +56,13 @@ const iranYekanX = localFont({
 	],
 	variable: "--font-iran-yekan",
 });
+
+export const metadata: Metadata = {
+	title: "پیش‌بینی بازی‌ها",
+	other: {
+		preload: "@/assets/header-bg.png",
+	},
+};
 
 export default function RootLayout({
 	children,

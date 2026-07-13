@@ -167,6 +167,7 @@ export default function MatchDistributionBar({
 					{/* دکمه فلش سمت چپ */}
 
 					<button
+						aria-label="باز کردن لیست سوالات"
 						type="button"
 						style={styles.leftBtn}
 						className={`${

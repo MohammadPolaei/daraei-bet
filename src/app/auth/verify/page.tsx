@@ -80,12 +80,14 @@ export default function Verify() {
 							</p>
 						)}
 						<button
+							aria-label="ارسال مجدد"
 							className="text-[10px]"
 							onClick={() => sendPhoneAuth(String(phoneNumber))}
 						>
 							ارسال مجدد کد
 						</button>
 						<button
+							aria-label="ارسال کد"
 							type="submit"
 							disabled={isLoading}
 							className="bg-(--primary) py-3 text-black text-[16px] font-semibold w-full rounded-[14px] disabled:opacity-50 transition-opacity"

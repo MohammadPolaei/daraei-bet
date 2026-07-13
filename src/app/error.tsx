@@ -24,6 +24,7 @@ export default function Error({ reset }: ErrorProps) {
 
 				<div className="flex gap-3">
 					<button
+						aria-label="تلاش دوباره"
 						type="button"
 						onClick={() => reset()}
 						className="flex-1 rounded-2xl bg-[#8ca825] px-4 py-3 text-sm font-medium text-black transition hover:opacity-90"
@@ -32,6 +33,7 @@ export default function Error({ reset }: ErrorProps) {
 					</button>
 
 					<button
+						aria-label="بازگشت به صفحه قبل"
 						type="button"
 						onClick={() => window.history.back()}
 						className="flex-1 rounded-2xl bg-white/10 px-4 py-3 text-sm font-medium text-white transition hover:bg-white/15"

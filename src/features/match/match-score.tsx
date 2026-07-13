@@ -155,6 +155,7 @@ export default function MatchScore({ gameId }: { gameId: string }) {
 			</div>
 			<div className={`w-full flex justify-between items-center gap-2`}>
 				<button
+					aria-label="برد تیم اول"
 					onClick={() => {
 						setActiveButton("right");
 						setCountTeamA(1);
@@ -176,6 +177,7 @@ export default function MatchScore({ gameId }: { gameId: string }) {
 					)}
 				</button>
 				<button
+					aria-label="پنالتی"
 					onClick={() => {
 						setActiveButton("middle");
 					}}
@@ -188,6 +190,7 @@ export default function MatchScore({ gameId }: { gameId: string }) {
 					ضربات پنالتی
 				</button>
 				<button
+					aria-label="برد تیم دوم"
 					onClick={() => {
 						setActiveButton("left");
 						setCountTeamA(0);
