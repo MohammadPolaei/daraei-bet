@@ -6,7 +6,6 @@ import MatchHeroCard from "@/features/match/match-hero-card";
 import PredictionSection from "@/features/predictions/prediction-section";
 import ThisMatchScore from "@/features/stats/this-match-score";
 import Header from "@/layout/header";
-import MobileNavbar from "@/layout/mobile-navbar";
 
 export default function Home() {
 	return (
@@ -21,7 +20,7 @@ export default function Home() {
 					</PredictionFormProvider>
 				</PredictionProvider>
 			</main>
-			<MobileNavbar />
+			{/* <MobileNavbar /> */}
 		</div>
 	);
 }

@@ -26,7 +26,6 @@ export default function PredictionCard({
 			return sum + Number(currentValue.participants_count);
 		}, 0);
 	}, [question]);
-	console.log(question);
 
 	const userAnswered = useMemo(() => {
 		return question.options.find(

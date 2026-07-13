@@ -11,7 +11,7 @@ import { getGame } from "@/services/get-game";
 import { SingleGameResponse } from "@/types/game-type";
 import { useQuery } from "@tanstack/react-query";
 import { OctagonAlert } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import MatchDistributionBar from "../stats/match-distribution-bar";
 import MatchLeverage from "./match-leverage";
 import MatchScore from "./match-score";
@@ -35,6 +35,7 @@ export interface MultiSegmentProgressBarProps {
 export default function MatchHeroCard() {
 	const { activePrediction, setActivePrediction, winner } = usePrediction();
 	const [changedState, setChangedState] = useState(false);
+	const [submitted, setSubmitted] = useState(false);
 	// game data
 	const { data, isLoading } = useQuery<SingleGameResponse>({
 		queryKey: ["game", gameId],
@@ -72,7 +73,13 @@ export default function MatchHeroCard() {
 
 	// submit prediction
 	const { state, dispatch } = usePredictionForm();
+
 	const submitPrediction = useSubmitPrediction();
+
+	const initialState = useMemo(() => {
+		return { ...state };
+	}, [submitPrediction.isPending]);
+
 	const handleSubmit = () => {
 		dispatch({
 			type: "SET_GAME_ID",
@@ -99,11 +106,8 @@ export default function MatchHeroCard() {
 
 		console.log("Sending data:", payloadToSend);
 
-		submitPrediction.mutate(payloadToSend, {
-			onSuccess: () => {
-				dispatch({ type: "RESET_FORM" });
-			},
-		});
+		submitPrediction.mutate(payloadToSend);
+		setSubmitted(true);
 	};
 
 	useEffect(() => {
@@ -125,6 +129,20 @@ export default function MatchHeroCard() {
 		} else return;
 	}, [state, userPrediction]);
 
+	useEffect(() => {
+		const equalStates =
+			JSON.stringify(initialState.predictions) ===
+			JSON.stringify(state.predictions);
+
+		if (equalStates) {
+			setSubmitted(false);
+			return;
+		} else {
+			setSubmitted(true);
+			return;
+		}
+	}, [state]);
+
 	return (
 		<div className="">
 			<SectionContainer extraClass="flex flex-col justify-center items-center gap-4">
@@ -137,7 +155,8 @@ export default function MatchHeroCard() {
 						winner == "none" ||
 						submitPrediction.isPending ||
 						status !== "upcoming" ||
-						!changedState
+						!changedState ||
+						!submitted
 					}
 				>
 					ویرایش پیش بینی
