@@ -9,7 +9,7 @@ import Header from "@/layout/header";
 
 export default function Home() {
 	return (
-		<div className="min-h-fit max-w-93.75 bg-app-bg pb-24 flex flex-col justify-start items-center relative">
+		<div className="min-h-fit max-w-sm bg-app-bg pb-24 flex flex-col justify-start items-center relative">
 			<Header />
 			<main className="container mx-auto px-4 py-1 space-y-3">
 				<PredictionProvider>

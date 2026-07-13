@@ -45,7 +45,7 @@ const itemVariants: Variants = {
 	},
 };
 
-const gameId = "019f5546-21df-7019-a943-fc94b1938168";
+const gameId = "019f413d-6c50-715e-9fe1-b7986596076a";
 
 export default function PredictionSection() {
 	const { activePrediction } = usePrediction();
