@@ -1,6 +1,7 @@
 "use client";
 
 import { usePrediction } from "@/context/active-prediction-context";
+import { MessageSquareText } from "lucide-react";
 import Link from "next/link";
 import { CSSProperties, HTMLAttributes } from "react";
 
@@ -39,9 +40,11 @@ const styles: { [key: string]: CSSProperties } = {
 	shine: {
 		position: "absolute",
 		inset: 0,
+		width: "150%",
+		height: "100%",
 		pointerEvents: "none",
 		background:
-			"linear-gradient(112deg, transparent 0%, rgba(163,229,0,0.03) 40%, rgba(163,229,0,0.12) 50%, rgba(163,229,0,0.03) 60%, transparent 100%)",
+			"linear-gradient(112deg, transparent 30%, rgba(255, 255, 255, 0.02) 43%, rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0.02) 57%, transparent 70%)",
 	},
 	leftBtn: {
 		width: 35,
@@ -100,10 +103,10 @@ const styles: { [key: string]: CSSProperties } = {
 		marginTop: 4,
 	},
 	rightIconOuter: {
-		width: 35,
-		height: 35,
+		width: 40,
+		height: 40,
 		borderRadius: "50%",
-		border: "1.5px solid rgba(156, 226, 62, 0.35)",
+		border: "1px solid rgba(156, 226, 62, 0.35)",
 		display: "grid",
 		placeItems: "center",
 		boxShadow: "0 0 0 8px rgba(156, 226, 62, 0.04)",
@@ -133,25 +136,18 @@ export default function MatchDistributionBar({
 						?.scrollIntoView({ behavior: "smooth" });
 				}}
 			>
-				<div style={styles.card}>
-					<div style={styles.shine} />
-
+				<div style={styles.card} className="relative overflow-hidden">
+					<div style={styles.shine} className="animate-shine z-20" />
 					{/* آیکن سمت راست */}
 
-					<div style={styles.rightIconOuter}>
-						<svg
-							width="20"
-							height="20"
-							viewBox="0 0 24 24"
-							fill="none"
-							stroke="currentColor"
-							strokeWidth="1.5"
-							strokeLinecap="round"
-							strokeLinejoin="round"
-						>
-							<path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 1 1-7.6-10.8 8.38 8.38 0 0 1 3.8.9L21 3.5v8z" />
-							<path d="M11 12h.01M16 12h.01M7 12h.01" strokeWidth="2" />
-						</svg>
+					<div
+						style={styles.rightIconOuter}
+						className="animate-signal-shadow bg-radial from-transparent via-(--primary)/10 to-(--primary)/20"
+					>
+						<MessageSquareText
+							size={18}
+							className="text-(--primary) animate-move-up-little"
+						/>
 					</div>
 
 					{/* محتوای متنی وسط */}
@@ -159,7 +155,9 @@ export default function MatchDistributionBar({
 					<div style={styles.content}>
 						<div className="w-full flex justify-start items-center gap-2 relative">
 							<h3 style={styles.title}>پیش‌بینی اتفاقات بازی</h3>
-							<div style={styles.badge}>تا ۱۱۶,۰۰۰ امتیاز</div>
+							<div style={styles.badge} className="animation-scale-up">
+								تا ۱۱۶,۰۰۰ امتیاز
+							</div>
 						</div>
 						<p style={styles.subtitle}>۶ سوال بدون پاسخ</p>
 					</div>
@@ -183,6 +181,7 @@ export default function MatchDistributionBar({
 							strokeWidth="2.5"
 							strokeLinecap="round"
 							strokeLinejoin="round"
+							className={`${activePrediction ? "animate-move-left" : ""}`}
 						>
 							<path d="M18 15l-6-6-6 6" />
 						</svg>
