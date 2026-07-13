@@ -19,6 +19,7 @@ export default function PredictionRedYellowCard({
 
 	const [selectedYellowRedOptionId, setSelectedYellowRedOptionId] =
 		useState<string>("");
+
 	const [optionLeverage, setOptionLeverage] = useState(1);
 	const submitMutation = useSubmitOptionPrediction();
 
@@ -116,16 +117,26 @@ export default function PredictionRedYellowCard({
 					aria-label="ارسال پاسخ"
 					disabled={submitMutation.isPending}
 					onClick={() => {
-						submitMutation.mutateAsync({
-							game_id: gameId,
-							answers: [
-								{
-									question_id: question.id,
-									option_id: selectedYellowRedOptionId,
-									leverage: String(optionLeverage),
+						submitMutation.mutate(
+							{
+								game_id: gameId,
+								answers: [
+									{
+										question_id: question.id,
+										option_id: selectedYellowRedOptionId,
+										leverage: String(optionLeverage),
+									},
+								],
+							},
+							{
+								onSuccess: () => {
+									setSelectedYellowRedOptionId("");
 								},
-							],
-						});
+								onError: (error) => {
+									console.error(error);
+								},
+							}
+						);
 					}}
 					className="w-full bg-(--primary) text-black rounded-[7px] py-2  font-semibold text-[15px] cursor-pointer transition-all duration-200 ease-in-out active:scale-90 active:opacity-50 origin-center disabled:opacity-40"
 				>

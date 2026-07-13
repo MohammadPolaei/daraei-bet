@@ -121,16 +121,26 @@ export default function PredictionCard({
 					aria-label="ثبت پاسخ"
 					disabled={submitMutation.isPending}
 					onClick={() => {
-						submitMutation.mutateAsync({
-							game_id: gameId,
-							answers: [
-								{
-									question_id: question.id,
-									option_id: selectedOptionId,
-									leverage: String(optionLeverage),
+						submitMutation.mutate(
+							{
+								game_id: gameId,
+								answers: [
+									{
+										question_id: question.id,
+										option_id: selectedOptionId,
+										leverage: String(optionLeverage),
+									},
+								],
+							},
+							{
+								onSuccess: () => {
+									setSelectedOptionId("");
 								},
-							],
-						});
+								onError: (error) => {
+									console.error("Submit failed:", error);
+								},
+							}
+						);
 					}}
 					className="w-full bg-(--primary) text-black rounded-[7px] py-2  font-semibold text-[15px] cursor-pointer transition-all duration-200 ease-in-out active:scale-90 active:opacity-50 origin-center disabled:opacity-40"
 				>
