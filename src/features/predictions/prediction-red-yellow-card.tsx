@@ -15,7 +15,7 @@ export default function PredictionRedYellowCard({
 	question: SpeculativeQuestionItem;
 	questionNumber: number;
 }) {
-	const gameId = "019f5546-21df-7019-a943-fc94b1938168";
+	const gameId = "019f530f-9a59-727d-a71a-7258e578613d";
 
 	const [selectedYellowRedOptionId, setSelectedYellowRedOptionId] =
 		useState<string>("");
@@ -27,6 +27,12 @@ export default function PredictionRedYellowCard({
 			return sum + Number(currentValue.participants_count);
 		}, 0);
 	}, [question]);
+
+	const userAnswered = useMemo(() => {
+		return question.options.find(
+			(answer) => answer.id == question.user_answer?.option_id
+		);
+	}, [question.user_answer?.option_id]);
 
 	return (
 		<SectionContainer extraClass="w-full p-3">
@@ -52,14 +58,20 @@ export default function PredictionRedYellowCard({
 					</span>
 				</h3>
 			</div>
-			<YellowRedCardMeter
-				card={card}
-				question={question}
-				value={selectedYellowRedOptionId}
-				onChange={(option) => {
-					setSelectedYellowRedOptionId(option.id);
-				}}
-			/>
+			{question.user_answer ? (
+				<SectionContainer extraClass=" flex flex-col justify-center items-center p-3 bg-(--primary)/10">
+					<span className="text-(--primary) w-full text-center text-[14px] font-semibold">{`پاسخ ثبت شده: ${userAnswered?.text}`}</span>
+				</SectionContainer>
+			) : (
+				<YellowRedCardMeter
+					card={card}
+					question={question}
+					value={selectedYellowRedOptionId}
+					onChange={(option) => {
+						setSelectedYellowRedOptionId(option.id);
+					}}
+				/>
+			)}
 			{/* push answer section */}
 			<div
 				className={`${

@@ -5,6 +5,7 @@ import { SpeculativeQuestionItem } from "@/types/question-response-type";
 import { ChevronLeft, UsersRound } from "lucide-react";
 import { useMemo, useState } from "react";
 import PredictionOptions from "./prediction-options";
+import PredictionOptionsSelected from "./prediction-options-selected";
 import { PredictionProgress } from "./prediction-progress";
 
 export default function PredictionCard({
@@ -14,7 +15,7 @@ export default function PredictionCard({
 	question: SpeculativeQuestionItem;
 	questionNumber: number;
 }) {
-	const gameId = "019f5546-21df-7019-a943-fc94b1938168";
+	const gameId = "019f530f-9a59-727d-a71a-7258e578613d";
 	// submit options
 	const submitMutation = useSubmitOptionPrediction();
 	const [selectedOptionId, setSelectedOptionId] = useState("");
@@ -25,6 +26,13 @@ export default function PredictionCard({
 			return sum + Number(currentValue.participants_count);
 		}, 0);
 	}, [question]);
+	console.log(question);
+
+	const userAnswered = useMemo(() => {
+		return question.options.find(
+			(answer) => answer.id == question.user_answer?.option_id
+		);
+	}, [question.user_answer?.option_id]);
 
 	const yesPercentageData = useMemo(() => {
 		return (
@@ -57,8 +65,20 @@ export default function PredictionCard({
 					</span>
 				</h3>
 			</div>
-			<PredictionOptions selector={setSelectedOptionId} question={question} />
-			<PredictionProgress yesPercent={yesPercentageData} />
+			{question.user_answer ? (
+				<PredictionOptionsSelected
+					question={question}
+					selectedOptionId={userAnswered!.id}
+				/>
+			) : (
+				<>
+					<PredictionOptions
+						selector={setSelectedOptionId}
+						question={question}
+					/>
+					<PredictionProgress yesPercent={yesPercentageData} />
+				</>
+			)}
 			{/* push answer section */}
 			<div
 				className={`${

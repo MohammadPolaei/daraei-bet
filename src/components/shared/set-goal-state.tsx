@@ -5,11 +5,13 @@ export default function SetGoalState({
 	min,
 	max,
 	setState,
+	value,
 }: {
 	children: ReactNode;
 	min: number;
 	max: number;
 	setState: Dispatch<SetStateAction<number>>;
+	value?: number;
 }) {
 	const addAndPluseButtonClasses =
 		"relative w-4.5 h-4.5 border-1 flex flex-col justify-center items-center rounded-[7px] disabled:opacity-50";

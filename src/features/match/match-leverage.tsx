@@ -8,7 +8,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Coins } from "lucide-react";
 import { useEffect, useState } from "react";
 
-const gameId = "019f5546-21df-7019-a943-fc94b1938168";
+const gameId = "019f530f-9a59-727d-a71a-7258e578613d";
 
 export default function MatchLeverage() {
 	const { dispatch } = usePredictionForm();
@@ -28,6 +28,14 @@ export default function MatchLeverage() {
 		queryFn: () => getGame(gameId),
 		enabled: !!gameId,
 	});
+	const leverageData = data?.data?.included?.find(
+		(item) => item.attributes.outcome_predicted
+	);
+	useEffect(() => {
+		if (leverageData) {
+			setLeverage(Number(leverageData?.attributes.leverage_multiplier));
+		}
+	}, [data]);
 
 	return (
 		<div className="w-full flex flex-col justify-start items-center gap-2">

@@ -5,7 +5,7 @@ import headerBg from "@/assets/header-bg.png";
 import { Bell, CircleChevronRight } from "lucide-react";
 import Image from "next/image";
 
-const gameId = "019f5546-21df-7019-a943-fc94b1938168";
+const gameId = "019f530f-9a59-727d-a71a-7258e578613d";
 
 export default function Header() {
 	// const { data } = useUserProfile();

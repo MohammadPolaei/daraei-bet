@@ -66,19 +66,33 @@ export interface GameEntity {
 	attributes: GameAttributes;
 	relationships: GameRelationships;
 }
-
 export interface TeamAttributes {
-	name: string;
-	fa_name: string;
-	country_code: string;
-	group: string;
-	wins: number;
-	draws: number;
-	losses: number;
-	points: number;
-	goal_difference: number;
-	created_at: IsoDateString;
-	updated_at: IsoDateString;
+	// فیلدهای مشترک و مربوط به پیش‌بینی (Predictions)
+	created_at?: string;
+	entry_points?: number;
+	game_id?: string;
+	is_best_for_user_game?: boolean;
+	is_penalty_prediction?: boolean;
+	leverage_multiplier?: number;
+	outcome_predicted?: string;
+	points?: number;
+	result_tier?: null | string | number;
+	score_team1_predicted?: number;
+	score_team2_predicted?: number;
+	slot?: number;
+	status?: string;
+	updated_at?: string;
+	user_id?: string;
+
+	// فیلدهای مربوط به تیم (Team Attributes)
+	name?: string;
+	fa_name?: string;
+	country_code?: string;
+	group?: string;
+	wins?: number;
+	draws?: number;
+	losses?: number;
+	goal_difference?: number;
 }
 
 export interface TeamEntity {

@@ -11,12 +11,13 @@ import { getGame } from "@/services/get-game";
 import { SingleGameResponse } from "@/types/game-type";
 import { useQuery } from "@tanstack/react-query";
 import { OctagonAlert } from "lucide-react";
+import { useEffect, useState } from "react";
 import MatchDistributionBar from "../stats/match-distribution-bar";
 import MatchLeverage from "./match-leverage";
 import MatchScore from "./match-score";
 import UsersMatchForecast from "./users-match-forecast";
 
-const gameId = "019f5546-21df-7019-a943-fc94b1938168";
+const gameId = "019f530f-9a59-727d-a71a-7258e578613d";
 
 export interface ProgressSegment {
 	label: string;
@@ -33,12 +34,18 @@ export interface MultiSegmentProgressBarProps {
 
 export default function MatchHeroCard() {
 	const { activePrediction, setActivePrediction, winner } = usePrediction();
+	const [changedState, setChangedState] = useState(false);
 	// game data
 	const { data, isLoading } = useQuery<SingleGameResponse>({
 		queryKey: ["game", gameId],
 		queryFn: () => getGame(gameId),
 		enabled: !!gameId,
 	});
+
+	// this user prediction
+	const userPrediction = data?.data?.included.filter(
+		(data) => data.attributes.outcome_predicted
+	);
 
 	// context
 
@@ -99,6 +106,25 @@ export default function MatchHeroCard() {
 		});
 	};
 
+	useEffect(() => {
+		if (!isLoading) {
+			if (
+				state.predictions[0].predicts_penalty ==
+					userPrediction![0].attributes.is_penalty_prediction &&
+				state.predictions[0].leverage ==
+					userPrediction![0].attributes.leverage_multiplier &&
+				state.predictions[0].score_team1_predicted ==
+					userPrediction![0].attributes.score_team1_predicted &&
+				state.predictions[0].score_team2_predicted ==
+					userPrediction![0].attributes.score_team2_predicted
+			) {
+				setChangedState(false);
+			} else {
+				setChangedState(true);
+			}
+		} else return;
+	}, [state, userPrediction]);
+
 	return (
 		<div className="">
 			<SectionContainer extraClass="flex flex-col justify-center items-center gap-4">
@@ -110,7 +136,8 @@ export default function MatchHeroCard() {
 					disabled={
 						winner == "none" ||
 						submitPrediction.isPending ||
-						status !== "upcoming"
+						status !== "upcoming" ||
+						!changedState
 					}
 				>
 					ویرایش پیش بینی
