@@ -1,3 +1,4 @@
+import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(
@@ -5,6 +6,17 @@ export async function GET(
 	{ params }: { params: Promise<{ game: string }> }
 ) {
 	const { game } = await params;
+	const token = (await cookies()).get("token")?.value;
+
+	if (!token) {
+		return NextResponse.json(
+			{
+				success: false,
+				message: "Unauthorized",
+			},
+			{ status: 401 }
+		);
+	}
 
 	try {
 		const response = await fetch(
@@ -13,6 +25,7 @@ export async function GET(
 				method: "GET",
 				headers: {
 					"Content-Type": "application/json",
+					Authorization: `Bearer ${token}`,
 				},
 				cache: "no-store",
 			}

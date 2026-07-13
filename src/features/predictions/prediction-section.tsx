@@ -50,7 +50,6 @@ const gameId = "019f5546-21df-7019-a943-fc94b1938168";
 export default function PredictionSection() {
 	const { activePrediction } = usePrediction();
 	const { data, isLoading } = useQuestion(gameId);
-	console.log(data);
 
 	return (
 		<div className="w-full">

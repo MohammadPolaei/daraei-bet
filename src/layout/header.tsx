@@ -1,10 +1,16 @@
 "use client";
 
+import CupIcon from "@/assets/cup-icon";
 import headerBg from "@/assets/header-bg.png";
 import { Bell, CircleChevronRight } from "lucide-react";
 import Image from "next/image";
 
+const gameId = "019f5546-21df-7019-a943-fc94b1938168";
+
 export default function Header() {
+	// const { data } = useUserProfile();
+	// const userScore = data?.data.data.attributes.points_total;
+
 	return (
 		<div
 			id="header"
@@ -36,6 +42,7 @@ export default function Header() {
 			<div className="flex items-center justify-start gap-1">
 				<div className="flex h-8 items-center justify-center gap-1 rounded-full bg-linear-180 from-black via-transparent to-(--primary)/20 px-3 text-[12px] font-bold text-(--primary) cursor-pointer">
 					<span>20,150,960</span>
+					<CupIcon className="size-6 text-(--primary)" />
 				</div>
 				<div className="flex h-7 w-7 flex-col items-center justify-center rounded-full bg-linear-180 from-black via-transparent to-(--primary)/20 animation-notification relative">
 					<span className="absolute top-[-5] left-[-5] w-4 h-4 text-[8px] font-semibold bg-red-400 flex flex-col justify-center items-center rounded-full">
