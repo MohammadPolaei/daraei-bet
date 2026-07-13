@@ -73,7 +73,7 @@ export default function MatchHeroCard() {
 			payload: gameId,
 		});
 
-		const currentState = state;
+		const currentState = { ...state, game_id: gameId };
 
 		let payloadToSend;
 
