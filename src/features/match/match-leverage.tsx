@@ -39,7 +39,7 @@ export default function MatchLeverage() {
 				{isLoading ? (
 					<div
 						dir="ltr"
-						className="w-full h-8 rounded-2xl flex flex-col justify-center items-center text-center bg-gray-500/40 animate-pulse"
+						className="w-full h-6 rounded-2xl flex flex-col justify-center items-center text-center bg-gray-500/40 animate-pulse"
 					/>
 				) : (
 					<>

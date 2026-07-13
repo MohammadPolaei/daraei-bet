@@ -34,12 +34,11 @@ export interface MultiSegmentProgressBarProps {
 export default function MatchHeroCard() {
 	const { activePrediction, setActivePrediction, winner } = usePrediction();
 	// game data
-	const { data, isLoading, isError, error } = useQuery<SingleGameResponse>({
+	const { data, isLoading } = useQuery<SingleGameResponse>({
 		queryKey: ["game", gameId],
 		queryFn: () => getGame(gameId),
 		enabled: !!gameId,
 	});
-	console.log(data);
 
 	// context
 

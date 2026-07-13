@@ -13,7 +13,7 @@ import { useEffect, useState } from "react";
 
 export default function MatchScore({ gameId }: { gameId: string }) {
 	const [activeButton, setActiveButton] = useState("");
-	const { data, isLoading, isError, error } = useQuery<SingleGameResponse>({
+	const { data, isLoading, isError } = useQuery<SingleGameResponse>({
 		queryKey: ["game", gameId],
 		queryFn: () => getGame(gameId),
 		enabled: !!gameId,
@@ -67,14 +67,20 @@ export default function MatchScore({ gameId }: { gameId: string }) {
 							<div className="">
 								{/* <img src={flag.src} className="rounded-full w-10 h-10" /> */}
 								{isLoading ? (
-									<div
-										dir="ltr"
-										className="w-10 h-10 rounded-full flex flex-col justify-center items-center text-center bg-gray-500/40 animate-pulse text-[8px]"
-									/>
+									<div className="flex flex-col items-center gap-2">
+										<div
+											dir="ltr"
+											className="w-13 h-13 rounded-full flex flex-col justify-center items-center text-center bg-gray-500/40 animate-pulse text-[8px]"
+										/>
+										<div
+											dir="ltr"
+											className="w-10 h-5 rounded-full flex flex-col justify-center items-center text-center bg-gray-500/40 animate-pulse text-[8px]"
+										/>
+									</div>
 								) : isError ? (
 									<div
 										dir="ltr"
-										className="w-10 h-10 rounded-full flex flex-col justify-center items-center text-center bg-red-500/40 text-[8px]"
+										className="w-14 h-14 rounded-full flex flex-col justify-center items-center text-center bg-red-500/40 text-[8px]"
 									/>
 								) : (
 									<FlagIcon
@@ -102,7 +108,7 @@ export default function MatchScore({ gameId }: { gameId: string }) {
 								) : (
 									<div
 										dir="ltr"
-										className="w-full h-8 rounded-2xl flex flex-col justify-center items-center text-center bg-gray-500/40 animate-pulse text-[10px]"
+										className="w-10 h-0 rounded-2xl flex flex-col justify-center items-center text-center bg-gray-500/40 animate-pulse text-[10px]"
 									/>
 								)}
 							</span>
@@ -110,14 +116,20 @@ export default function MatchScore({ gameId }: { gameId: string }) {
 						<div className="flex flex-col items-center gap-2">
 							<div className="">
 								{isLoading ? (
-									<div
-										dir="ltr"
-										className="w-10 h-10 rounded-full flex flex-col justify-center items-center text-center bg-gray-500/40 animate-pulse text-[8px]"
-									/>
+									<div className="flex flex-col items-center gap-2">
+										<div
+											dir="ltr"
+											className="w-13 h-13 rounded-full flex flex-col justify-center items-center text-center bg-gray-500/40 animate-pulse text-[8px]"
+										/>
+										<div
+											dir="ltr"
+											className="w-10 h-5 rounded-full flex flex-col justify-center items-center text-center bg-gray-500/40 animate-pulse text-[8px]"
+										/>
+									</div>
 								) : isError ? (
 									<div
 										dir="ltr"
-										className="w-10 h-10 rounded-full flex flex-col justify-center items-center text-center bg-red-500/40 text-[8px]"
+										className="w-14 h-14 rounded-full flex flex-col justify-center items-center text-center bg-red-500/40 text-[8px]"
 									/>
 								) : (
 									<FlagIcon
@@ -133,7 +145,7 @@ export default function MatchScore({ gameId }: { gameId: string }) {
 				{isLoading ? (
 					<div
 						dir="ltr"
-						className="w-15 absolute bottom-0 h-4 rounded-2xl flex flex-col justify-center items-center text-center bg-gray-500/40 animate-pulse"
+						className="w-15 absolute bottom-0.5 h-5 rounded-2xl flex flex-col justify-center items-center text-center bg-gray-500/40 animate-pulse"
 					/>
 				) : (
 					<div className="absolute bottom-0.5 text-[12px] text-(--text-muted) flex flex-col">
@@ -157,7 +169,7 @@ export default function MatchScore({ gameId }: { gameId: string }) {
 					{isLoading ? (
 						<div
 							dir="ltr"
-							className="w-full h-8 rounded-2xl flex flex-col justify-center items-center text-center bg-gray-500/40 animate-pulse"
+							className="w-full h-full rounded-2xl flex flex-col justify-center items-center text-center bg-gray-500/40 animate-pulse"
 						/>
 					) : (
 						<span>برد {team1}</span>
@@ -190,7 +202,7 @@ export default function MatchScore({ gameId }: { gameId: string }) {
 					{isLoading ? (
 						<div
 							dir="ltr"
-							className="w-full h-8 rounded-2xl flex flex-col justify-center items-center text-center bg-gray-500/40 animate-pulse"
+							className="w-full h-full rounded-2xl flex flex-col justify-center items-center text-center bg-gray-500/40 animate-pulse"
 						/>
 					) : (
 						<span>برد {team2}</span>
