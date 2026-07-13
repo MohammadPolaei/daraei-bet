@@ -20,9 +20,7 @@ export default function UsersMatchForecast({
 				<div
 					dir="ltr"
 					className="w-full h-8 rounded-2xl flex flex-col justify-center items-center text-center bg-gray-500/40 animate-pulse"
-				>
-					Loading...
-				</div>
+				/>
 			) : (
 				<MultiSegmentProgressBar teamA={teamA} teamB={teamB} data={data} />
 			)}

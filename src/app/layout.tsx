@@ -1,6 +1,7 @@
 import QueryProvider from "@/providers/query-provider";
 import "flag-icons/css/flag-icons.min.css";
 import localFont from "next/font/local";
+import { Toaster } from "sonner";
 import "./globals.css";
 
 // تعریف فونت ایران‌یکان با تمام وزن‌ها
@@ -70,6 +71,8 @@ export default function RootLayout({
 				}}
 				className="min-h-fit flex flex-col justify-start items-center bg-black antialiased"
 			>
+				<Toaster richColors position="top-center" />
+
 				<QueryProvider>{children}</QueryProvider>
 			</body>
 		</html>

@@ -93,9 +93,7 @@ export default function MatchScore({ gameId }: { gameId: string }) {
 									<div
 										dir="ltr"
 										className="w-15 h-8 rounded-2xl flex flex-col justify-center items-center text-center bg-gray-500/40 animate-pulse text-[8px]"
-									>
-										Loading...
-									</div>
+									/>
 								)}
 							</span>
 							<span className="text-[10px] text-(--text-muted)">
@@ -136,9 +134,7 @@ export default function MatchScore({ gameId }: { gameId: string }) {
 					<div
 						dir="ltr"
 						className="w-15 absolute bottom-0 h-4 rounded-2xl flex flex-col justify-center items-center text-center bg-gray-500/40 animate-pulse"
-					>
-						...
-					</div>
+					/>
 				) : (
 					<div className="absolute bottom-0.5 text-[12px] text-(--text-muted) flex flex-col">
 						{data?.data?.included[2].attributes.fa_name}
@@ -162,9 +158,7 @@ export default function MatchScore({ gameId }: { gameId: string }) {
 						<div
 							dir="ltr"
 							className="w-full h-8 rounded-2xl flex flex-col justify-center items-center text-center bg-gray-500/40 animate-pulse"
-						>
-							Loading...
-						</div>
+						/>
 					) : (
 						<span>برد {team1}</span>
 					)}
@@ -197,9 +191,7 @@ export default function MatchScore({ gameId }: { gameId: string }) {
 						<div
 							dir="ltr"
 							className="w-full h-8 rounded-2xl flex flex-col justify-center items-center text-center bg-gray-500/40 animate-pulse"
-						>
-							Loading...
-						</div>
+						/>
 					) : (
 						<span>برد {team2}</span>
 					)}

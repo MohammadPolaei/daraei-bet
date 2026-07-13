@@ -23,7 +23,7 @@ export default function MatchLeverage() {
 		});
 	}, [leverage]);
 
-	const { data, isLoading, isError, error } = useQuery<SingleGameResponse>({
+	const { data, isLoading } = useQuery<SingleGameResponse>({
 		queryKey: ["game", gameId],
 		queryFn: () => getGame(gameId),
 		enabled: !!gameId,
@@ -40,9 +40,7 @@ export default function MatchLeverage() {
 					<div
 						dir="ltr"
 						className="w-full h-8 rounded-2xl flex flex-col justify-center items-center text-center bg-gray-500/40 animate-pulse"
-					>
-						Loading...
-					</div>
+					/>
 				) : (
 					<>
 						<div>

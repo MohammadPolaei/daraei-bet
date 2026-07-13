@@ -39,9 +39,7 @@ export default function ThisMatchScore() {
 				<div
 					dir="ltr"
 					className="w-full h-8 rounded-2xl flex flex-col justify-center items-center text-center bg-gray-500/40 animate-pulse"
-				>
-					Loading...
-				</div>
+				/>
 			) : (
 				<Container className="flex justify-between items-center">
 					<span className="text-sm opacity-80">امتیاز این بازی</span>

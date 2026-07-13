@@ -14,8 +14,10 @@ export function useGamePrediction(gameID: string) {
 
 			return res.data;
 		},
+		refetchOnWindowFocus: false,
+		refetchOnReconnect: true,
 		enabled: Boolean(gameID),
-		staleTime: 60_000,
-		retry: 1,
+		staleTime: 30_000,
+		retry: 2,
 	});
 }

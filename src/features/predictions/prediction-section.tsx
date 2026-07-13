@@ -57,9 +57,7 @@ export default function PredictionSection() {
 				<div
 					dir="ltr"
 					className="w-full h-10 rounded-2xl flex flex-col justify-center items-center text-center bg-gray-500/40 animate-pulse"
-				>
-					Loading...
-				</div>
+				/>
 			) : data?.data?.accepts_answers !== true ? (
 				<SectionContainer extraClass="w-full py-5 text-center text-(--text-muted)/20">
 					مجاز به پاسخ دهی نیستید
