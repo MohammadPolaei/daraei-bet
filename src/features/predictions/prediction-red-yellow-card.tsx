@@ -15,7 +15,7 @@ export default function PredictionRedYellowCard({
 	question: SpeculativeQuestionItem;
 	questionNumber: number;
 }) {
-	const gameId = "019f530f-9a59-727d-a71a-7258e578613d";
+	const gameId = "019f5546-21df-7019-a943-fc94b1938168";
 
 	const [selectedYellowRedOptionId, setSelectedYellowRedOptionId] =
 		useState<string>("");

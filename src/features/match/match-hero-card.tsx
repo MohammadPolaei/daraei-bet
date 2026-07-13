@@ -17,7 +17,7 @@ import MatchLeverage from "./match-leverage";
 import MatchScore from "./match-score";
 import UsersMatchForecast from "./users-match-forecast";
 
-const gameId = "019f530f-9a59-727d-a71a-7258e578613d";
+const gameId = "019f5546-21df-7019-a943-fc94b1938168";
 
 export interface ProgressSegment {
 	label: string;
@@ -44,9 +44,9 @@ export default function MatchHeroCard() {
 	});
 
 	// this user prediction
-	const userPrediction = data?.data?.included.filter(
-		(data) => data.attributes.outcome_predicted
-	);
+	const userPrediction =
+		data?.data?.included.filter((data) => data.attributes.outcome_predicted) ||
+		[];
 
 	// context
 
@@ -111,23 +111,22 @@ export default function MatchHeroCard() {
 	};
 
 	useEffect(() => {
-		if (!isLoading) {
-			if (
-				state.predictions[0].predicts_penalty ==
-					userPrediction![0].attributes.is_penalty_prediction &&
-				state.predictions[0].leverage ==
-					userPrediction![0].attributes.leverage_multiplier &&
-				state.predictions[0].score_team1_predicted ==
-					userPrediction![0].attributes.score_team1_predicted &&
-				state.predictions[0].score_team2_predicted ==
-					userPrediction![0].attributes.score_team2_predicted
-			) {
-				setChangedState(false);
-			} else {
-				setChangedState(true);
-			}
-		} else return;
-	}, [state, userPrediction]);
+		const initialPred = userPrediction?.[0]?.attributes;
+		const currentPred = state.predictions[0];
+
+		if (!isLoading && initialPred) {
+			const isSame =
+				currentPred.predicts_penalty === initialPred.is_penalty_prediction &&
+				currentPred.leverage === initialPred.leverage_multiplier &&
+				currentPred.score_team1_predicted ===
+					initialPred.score_team1_predicted &&
+				currentPred.score_team2_predicted === initialPred.score_team2_predicted;
+
+			setChangedState(!isSame);
+		} else if (!isLoading && !initialPred) {
+			setChangedState(winner !== "none");
+		}
+	}, [state, userPrediction, isLoading, winner]);
 
 	useEffect(() => {
 		const equalStates =
