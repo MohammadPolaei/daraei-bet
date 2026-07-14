@@ -168,7 +168,7 @@ export default function MatchScore({ gameId }: { gameId: string }) {
 
 	return (
 		<div className="w-full flex flex-col justify-start gap-0">
-			<div className="relative w-full h-full top-[-5] flex flex-col justify-start items-center pointer-events-none">
+			<div className="relative w-full h-full top-[-5] large-mobile:pt-1 flex flex-col justify-start items-center pointer-events-none">
 				<MatchContainer>
 					<div className="w-full max-w-md flex justify-evenly items-center">
 						<div className="flex flex-col items-center gap-2">
@@ -264,7 +264,7 @@ export default function MatchScore({ gameId }: { gameId: string }) {
 				)}
 			</div>
 
-			<div className="w-full flex justify-between items-center gap-2 -mt-7 premedium-mobile:-mt-8 large-mobile:-mt-7">
+			<div className="w-full flex justify-between items-center gap-2 -mt-7 premedium-mobile:-mt-8 large-mobile:-mt-6.5">
 				<button
 					aria-label="برد تیم اول"
 					onClick={() => {

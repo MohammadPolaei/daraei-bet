@@ -20,7 +20,7 @@ export const TopTittle: FC<MatchStatusPillProps> = ({
 
 	return (
 		<div
-			className={`w-full absolute -top-20 small-mobile:-top-21 premedium-mobile:-top-21.5 premedium1-mobile:-top-22 medium-mobile:-top-22.5 large-mobile:-top-23 right-[-0.25] select-none pointer-events-none flex flex-col justify-start items-center 
+			className={`w-full absolute -top-20 small-mobile:-top-21 premedium-mobile:-top-21.5 premedium1-mobile:-top-22 medium-mobile:-top-22.5 large-mobile:-top-23 right-[-0.25] select-none pointer-events-none flex flex-col justify-start items-center premedium1-mobile:min-h-51 medium-mobile:min-h-53.5 small-mobile:min-h-50 min-h-48 
 				${className}`}
 			style={{
 				width,
