@@ -10,18 +10,17 @@ export const TopTittle: FC<MatchStatusPillProps> = ({
 	children,
 	className = "w-full",
 	width = "100%",
-	height = 200,
+	height = "50%",
 	style,
 	...props
 }) => {
 	const filterId = useId();
 
 	// نسبت اندازه متن نسبت به ارتفاع
-	const fontSize = Math.max(1, Math.round(height * 0.055));
 
 	return (
 		<div
-			className={`w-full absolute -top-22 right-[-0.25] select-none pointer-events-none flex flex-col justify-start items-center 
+			className={`w-full absolute -top-20 small-mobile:-top-21 premedium-mobile:-top-21.5 premedium1-mobile:-top-22 medium-mobile:-top-22.5 large-mobile:-top-23 right-[-0.25] select-none pointer-events-none flex flex-col justify-start items-center 
 				${className}`}
 			style={{
 				width,
@@ -87,10 +86,7 @@ export const TopTittle: FC<MatchStatusPillProps> = ({
 			</svg>
 
 			<div className="absolute inset-0 flex items-center justify-center">
-				<span
-					className="whitespace-nowrap font-black tracking-wider text-black z-10"
-					style={{ fontSize }}
-				>
+				<span className="whitespace-nowrap font-black tracking-wider text-black z-10 text-[12px]">
 					{children}
 				</span>
 			</div>

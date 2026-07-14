@@ -7,6 +7,7 @@ import SectionContainer from "@/components/base/section-container";
 import { useQuestion } from "@/hooks/use-question";
 import { SpeculativeQuestionItem } from "@/types/question-response-type";
 import { motion, type Variants } from "framer-motion";
+import { useEffect, useState } from "react";
 import PredictionCard from "./prediction-card";
 
 const containerVariants: Variants = {
@@ -49,14 +50,21 @@ const gameId = "019f5546-21df-7019-a943-fc94b1938168";
 
 export default function PredictionSection() {
 	const { activePrediction } = usePrediction();
+	const [hideContainer, setHideContainer] = useState(true);
 	const { data, isLoading } = useQuestion(gameId);
 
+	useEffect(() => {
+		if (!activePrediction) {
+			setTimeout(() => setHideContainer(true), 200);
+		} else setHideContainer(false);
+	}, [activePrediction]);
+
 	return (
-		<div className="w-full">
+		<div className={`w-full ${hideContainer ? "hidden" : ""} `}>
 			{isLoading ? (
 				<div
 					dir="ltr"
-					className="w-full h-10 rounded-2xl flex flex-col justify-center items-center text-center bg-gray-500/40 animate-pulse"
+					className={`w-full h-10 rounded-2xl flex flex-col justify-center items-center text-center bg-gray-500/40 animate-pulse`}
 				/>
 			) : data?.data?.accepts_answers !== true ? (
 				<SectionContainer extraClass="w-full py-5 text-center text-(--text-muted)/20">

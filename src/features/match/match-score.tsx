@@ -170,7 +170,7 @@ export default function MatchScore({ gameId }: { gameId: string }) {
 		<div className="w-full flex flex-col justify-start gap-0">
 			<div className="relative w-full h-full top-[-5] flex flex-col justify-start items-center pointer-events-none">
 				<MatchContainer>
-					<div className="w-full flex justify-evenly items-center">
+					<div className="w-full max-w-md flex justify-evenly items-center">
 						<div className="flex flex-col items-center gap-2">
 							<div>
 								{isLoading ? (
@@ -255,16 +255,16 @@ export default function MatchScore({ gameId }: { gameId: string }) {
 				{isLoading ? (
 					<div
 						dir="ltr"
-						className="w-15 absolute bottom-0.5 h-5 rounded-2xl flex flex-col justify-center items-center text-center bg-gray-500/40 animate-pulse"
+						className="w-15 absolute bottom-8 h-5 rounded-2xl flex flex-col justify-center items-center text-center bg-gray-500/40 animate-pulse"
 					/>
 				) : (
-					<div className="absolute bottom-11 medium-mobile:bottom-10.25 text-[12px] text-(--text-muted) flex flex-col">
+					<div className="absolute bottom-7 premedium-mobile:bottom-8 premedium1-mobile:bottom-8.5 medium-mobile:bottom-9 text-[12px] text-(--text-muted) flex flex-col">
 						{data?.data?.included?.[2]?.attributes.fa_name}
 					</div>
 				)}
 			</div>
 
-			<div className="w-full flex justify-between items-center gap-2 -mt-10 medium-mobile:-mt-8">
+			<div className="w-full flex justify-between items-center gap-2 -mt-7 premedium-mobile:-mt-8 large-mobile:-mt-7">
 				<button
 					aria-label="برد تیم اول"
 					onClick={() => {

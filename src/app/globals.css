@@ -51,8 +51,11 @@ body {
 
 /* break points */
 @theme {
-	--breakpoint-small-mobile: 320px;
-	--breakpoint-medium-mobile: 410px;
+	--breakpoint-small-mobile: 330px;
+	--breakpoint-premedium-mobile: 350px;
+	--breakpoint-premedium1-mobile: 390px;
+	--breakpoint-medium-mobile: 420px;
+	--breakpoint-large-mobile: 437px;
 }
 
 /* prediction section BOX */
